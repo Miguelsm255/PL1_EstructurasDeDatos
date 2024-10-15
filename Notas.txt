@@ -1,0 +1,20 @@
+//Pila donde se almacenan los datos por prioridades
+Al inicio, la pila está vacía, se van añadiendo elementos.
+
+añadir_elemento elemento, pila -> pila
+        si (es_vacia? pila) entonces apilar: elemento 
+        sino:
+                si((cima:pila).prioridad >= elemento.prioridad) 
+                        devolver apilar(cima(pila), añadir_elemento(elemento, desapilar(pila)))
+                sino
+                        devolver (apilar elemento)
+
+                finsi
+        finsi
+        devolver: pila
+        ffun
+
+
+elemento_a_nucleo pila, cola -> 
+
+
