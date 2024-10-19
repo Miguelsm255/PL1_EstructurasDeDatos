@@ -101,8 +101,21 @@ void Cola::encolarPrioridad(Elemento e)
     }
     else
     {
-        ultimo->siguiente = nuevo;
-        ultimo = nuevo;
+        Cola *Cola_aux = new Cola();
+        while (primero->elemento.prioridad >= e.prioridad)
+        {
+            Cola_aux->encolar(desencolar());
+        }
+        Cola_aux->encolar(e);
+        while (!esVacia())
+        {
+            Cola_aux->encolar(desencolar());
+        }
+        while (!Cola_aux->esVacia())
+        {
+            encolar(Cola_aux->desencolar());
+        }
+        delete (Cola_aux);
     }
     longitud++;
 }

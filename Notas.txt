@@ -1,18 +1,23 @@
 //Pila donde se almacenan los datos por prioridades
 Al inicio, la pila está vacía, se van añadiendo elementos.
 
-añadir_elemento elemento, pila -> pila
-        si (es_vacia? pila) entonces apilar: elemento 
+añadir_elemento nuestro_elemento, cola -> cola
+        c_aux <- c_vacia
+        si (es_vacia? cola) entonces apilar: nuestro_elemento 
         sino:
-                si((cima:pila).prioridad >= elemento.prioridad) 
-                        devolver apilar(cima(pila), añadir_elemento(elemento, desapilar(pila)))
-                sino
-                        devolver (apilar elemento)
-
-                finsi
+                mientras((primero:cola).prioridad >= nuestro_elemento.prioridad))
+                        e <- primero(cola)
+                        eliminar (cola)
+                        añadir(e, c_aux)
+                
+                finmientras
+                añadir(nuestro_elemento, c_aux)
+                mientras !(es_vacia?cola)
+                añadir (primero(cola), c_aux)
+                finmientras
         finsi
-        devolver: pila
         ffun
+
 
 
 elemento_a_nucleo pila, cola -> 

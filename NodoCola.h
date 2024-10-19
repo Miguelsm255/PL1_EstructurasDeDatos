@@ -7,8 +7,8 @@ class NodoCola
     friend class Cola;
 
 private:
-    NodoCola *siguiente;
     Elemento elemento;
+    NodoCola *siguiente;
 
 public:
     NodoCola();

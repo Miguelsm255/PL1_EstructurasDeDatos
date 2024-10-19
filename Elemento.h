@@ -6,9 +6,9 @@ struct Elemento
     int prioridad;
     int PID;
 
-    Elemento();               // Constructor por defecto
-    Elemento(int p, int PID); // Constructor parametrizado
-    ~Elemento();              // Destructor
+    Elemento(); // Constructor por defecto
+    Elemento(int p, int PID);
+    ~Elemento(); // Destructor
 };
 
 #endif // ELEMENTO_H
