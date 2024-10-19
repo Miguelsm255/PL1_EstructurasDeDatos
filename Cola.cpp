@@ -1,4 +1,6 @@
 #include "Cola.h"
+#include "Elemento.h"
+using namespace std;
 
 Cola::Cola()
 {
@@ -11,7 +13,7 @@ Cola::~Cola() // Destructor de la clase Cola
 {
 }
 
-void Cola::encolar(char e)
+void Cola::encolar(Elemento e)
 {
     NodoCola *nuevo = new NodoCola(e);
     if (esVacia())
@@ -27,11 +29,11 @@ void Cola::encolar(char e)
     longitud++;
 }
 
-char Cola::desencolar()
+Elemento Cola::desencolar()
 {
     if (!esVacia())
     {
-        char elemento = primero->elemento;
+        Elemento elemento = primero->elemento;
         NodoCola *aux = primero;
 
         if ((primero == ultimo) && (primero->siguiente == NULL))
@@ -52,7 +54,7 @@ char Cola::desencolar()
     }
 }
 
-char Cola::inicio()
+Elemento Cola::inicio()
 {
     if (!esVacia())
     {
@@ -60,7 +62,7 @@ char Cola::inicio()
     }
 }
 
-char Cola::fin()
+Elemento Cola::fin()
 {
     if (!esVacia())
     {
@@ -83,8 +85,24 @@ void Cola::mostrarCola()
     NodoCola *aux = primero;
     while (aux != NULL)
     {
-        std::cout << aux->elemento << " ";
+        cout << aux->elemento.PID << " ";
         aux = aux->siguiente;
     }
-    std::cout << std::endl;
+    cout << endl;
+}
+
+void Cola::encolarPrioridad(Elemento e)
+{
+    NodoCola *nuevo = new NodoCola(e);
+    if (esVacia())
+    {
+        primero = nuevo;
+        ultimo = nuevo;
+    }
+    else
+    {
+        ultimo->siguiente = nuevo;
+        ultimo = nuevo;
+    }
+    longitud++;
 }

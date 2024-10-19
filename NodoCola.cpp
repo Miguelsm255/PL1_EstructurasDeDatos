@@ -1,13 +1,14 @@
 #include "NodoCola.h"
+#include "Elemento.h"
 NodoCola::NodoCola()
 {
-    elemento = '0';
+    Elemento e = Elemento(0, 0);
     siguiente = NULL;
     // constructor por defecto
 }
-NodoCola::NodoCola(char e, NodoCola *sig)
+NodoCola::NodoCola(Elemento e, NodoCola *sig)
 {
-    elemento = e;
+    Elemento e = Elemento(0, 0);
     siguiente = sig;
 }
 NodoCola::~NodoCola()

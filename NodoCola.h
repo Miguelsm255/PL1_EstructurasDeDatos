@@ -1,5 +1,6 @@
 #ifndef NODOCOLA_H
 #define NODOCOLA_H
+#include "Elemento.h"
 #include <iostream>
 class NodoCola
 {
@@ -7,11 +8,11 @@ class NodoCola
 
 private:
     NodoCola *siguiente;
-    char elemento;
+    Elemento elemento;
 
 public:
     NodoCola();
-    NodoCola(char e, NodoCola *sig = NULL);
+    NodoCola(Elemento e, NodoCola *sig = NULL);
     ~NodoCola();
 };
 #endif // NODOCOLA_H
