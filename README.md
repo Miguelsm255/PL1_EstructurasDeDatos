@@ -71,3 +71,11 @@ El programa funcionará ahora mediante un __menú__ con, al menos, las siguiente
 * Aquí se está describiendo el funcionamiento básico del programa y las estructuras correspondientes, los alumnos deben tomar decisiones sobre los datos, su implementación, la interfaz del programa, etc, que deben ser justificadas en la documentación.
 * Es decisión de cada grupo la forma en que se mostrará en pantalla el contenido de las estructuras y la información sobre el funcionamiento de la simulación, se valorará la claridad de la misma.
 * Una vez entregada la práctica, se realizará una defensa en la que el programa debe funcionar correctamente con los datos de prueba que se facilitarán. La defensa, individual y obligatoria para ser calificado, constará de dos partes: o Defensa escrita (se realiza sin máquina) se puede traer, si se desea, el código en papel. o Defensa oral: para su realización es necesario traer el código entregado en el portátil o en un pen drive (en caso de no traer el portátil).
+
+
+
+***
+
+[¹] Una cola de prioridades es un tipo de dato abstracto similar a una cola en la que los elementos tienen adicionalmente, una prioridad asignada. En una cola de prioridades un elemento con mayor prioridad se sitúa antes, y por tanto será desencolado antes, que un elemento de menor prioridad. Si dos elementos tienen la misma prioridad, se desencolarán siguiendo el orden de cola.
+
+[²] La implementación se realizará utilizando Programación Orientada a Objetos y memoria dinámica.
