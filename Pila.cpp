@@ -17,8 +17,7 @@ bool Pila::esVacia()
 }
 void Pila::apilar(int v)
 {
-    pnodo nuevo = new NodoPila(v,
-                               cima);
+    pnodo nuevo = new NodoPila(v, cima);
     // comienzo de la pila nevo nodo
     cima = nuevo;
 }
@@ -26,7 +25,9 @@ void Pila::desapilar()
 {
     pnodo nodo; // puntero aux para manipular el nodo
     if (cima)
+    {
         nodo = cima;
+    }
     cima = nodo->siguiente;
     delete nodo;
 }
