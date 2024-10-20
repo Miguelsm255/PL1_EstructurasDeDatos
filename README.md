@@ -76,6 +76,6 @@ El programa funcionará ahora mediante un __menú__ con, al menos, las siguiente
 
 ***
 
-[¹] Una cola de prioridades es un tipo de dato abstracto similar a una cola en la que los elementos tienen adicionalmente, una prioridad asignada. En una cola de prioridades un elemento con mayor prioridad se sitúa antes, y por tanto será desencolado antes, que un elemento de menor prioridad. Si dos elementos tienen la misma prioridad, se desencolarán siguiendo el orden de cola.
+[¹]: Una cola de prioridades es un tipo de dato abstracto similar a una cola en la que los elementos tienen adicionalmente, una prioridad asignada. En una cola de prioridades un elemento con mayor prioridad se sitúa antes, y por tanto será desencolado antes, que un elemento de menor prioridad. Si dos elementos tienen la misma prioridad, se desencolarán siguiendo el orden de cola.
 
-[²] La implementación se realizará utilizando Programación Orientada a Objetos y memoria dinámica.
+[²]: La implementación se realizará utilizando Programación Orientada a Objetos y memoria dinámica.
