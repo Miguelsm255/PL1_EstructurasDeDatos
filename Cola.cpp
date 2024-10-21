@@ -13,9 +13,9 @@ Cola::~Cola() // Destructor de la clase Cola
 {
 }
 
-void Cola::encolar(Proceso e)
+void Cola::encolar(Proceso p)
 {
-    NodoCola *nuevo = new NodoCola(e);
+    NodoCola *nuevo = new NodoCola(p);
     if (esVacia())
     {
         primero = nuevo;
@@ -91,9 +91,9 @@ void Cola::mostrarCola()
     cout << endl;
 }
 
-void Cola::encolarPrioridad(Proceso e)
+void Cola::encolarPrioridad(Proceso p)
 {
-    NodoCola *nuevo = new NodoCola(e);
+    NodoCola *nuevo = new NodoCola(p);
     if (esVacia())
     {
         primero = nuevo;
@@ -102,11 +102,11 @@ void Cola::encolarPrioridad(Proceso e)
     else
     {
         Cola *Cola_aux = new Cola();
-        while (primero->proceso.prioridad >= e.prioridad)
+        while (primero->proceso.prioridad >= p.prioridad)
         {
             Cola_aux->encolar(desencolar());
         }
-        Cola_aux->encolar(e);
+        Cola_aux->encolar(p);
         while (!esVacia())
         {
             Cola_aux->encolar(desencolar());

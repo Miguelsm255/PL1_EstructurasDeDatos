@@ -12,7 +12,7 @@ private:
 
 public:
     NodoCola();
-    NodoCola(Proceso e, NodoCola *sig = NULL);
+    NodoCola(Proceso p, NodoCola *sig = NULL);
     ~NodoCola();
 };
 #endif // NODOCOLA_H
