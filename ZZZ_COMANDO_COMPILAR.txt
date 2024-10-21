@@ -1,0 +1,5 @@
+(estando en la terminal en la raíz del proyecto ejecutar el comando)
+(cambiar NOMBRE_DEL_ARCHIVO_COMPILADO por el nombre que quieras ponerle)
+(después ejecutar con ./NOMBRE_DEL_ARCHIVO_COMPILADO)
+
+g++ main.cpp Cola.cpp NodoCola.cpp NodoPila.cpp Pila.cpp Proceso.cpp -o NOMBRE_DEL_ARCHIVO_COMPILADO
