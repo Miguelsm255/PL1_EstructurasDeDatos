@@ -11,7 +11,7 @@ public:
     Pila();
     ~Pila();
     bool esVacia();
-    void apilar(int v);
+    void apilar(Proceso proceso);
     void desapilar();
     int mostrar();
 };

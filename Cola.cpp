@@ -1,4 +1,5 @@
 #include "Cola.h"
+#include "NodoCola.h"
 #include "Proceso.h"
 using namespace std;
 
