@@ -49,3 +49,8 @@ int Pila::mostrar()
     }
     return 0;
 }
+
+Proceso Pila::cimaPila()
+{
+    return cima->proceso;
+}

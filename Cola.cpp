@@ -92,6 +92,35 @@ void Cola::mostrarCola()
     cout << endl;
 }
 
+// void Cola::encolarPrioridad(Proceso p)
+// {
+//     NodoCola *nuevo = new NodoCola(p);
+//     if (esVacia())
+//     {
+//         primero = nuevo;
+//         ultimo = nuevo;
+//     }
+//     else
+//     {
+//         Cola *Cola_aux = new Cola();
+//         while (primero->proceso.prioridad >= p.prioridad)
+//         {
+//             Cola_aux->encolar(desencolar());
+//         }
+//         Cola_aux->encolar(p);
+//         while (!esVacia())
+//         {
+//             Cola_aux->encolar(desencolar());
+//         }
+//         while (!Cola_aux->esVacia())
+//         {
+//             encolar(Cola_aux->desencolar());
+//         }
+//         delete (Cola_aux);
+//     }
+//     longitud++;
+// }
+
 void Cola::encolarPrioridad(Proceso p)
 {
     NodoCola *nuevo = new NodoCola(p);
@@ -103,20 +132,24 @@ void Cola::encolarPrioridad(Proceso p)
     else
     {
         Cola *Cola_aux = new Cola();
-        while (primero->proceso.prioridad >= p.prioridad)
+        // Mover elementos a Cola_aux hasta encontrar la posición correcta para p
+        while (primero != nullptr && primero->proceso.prioridad <= p.prioridad)
         {
             Cola_aux->encolar(desencolar());
         }
+        // Encolar el nuevo proceso p
         Cola_aux->encolar(p);
+        // Mover el resto de los elementos a Cola_aux
         while (!esVacia())
         {
             Cola_aux->encolar(desencolar());
         }
+        // Mover todos los elementos de Cola_aux de vuelta a la cola original
         while (!Cola_aux->esVacia())
         {
             encolar(Cola_aux->desencolar());
         }
-        delete (Cola_aux);
+        delete Cola_aux;
     }
     longitud++;
 }
