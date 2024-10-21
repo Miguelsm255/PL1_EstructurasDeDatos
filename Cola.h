@@ -12,14 +12,14 @@ private:
 public:
     Cola();
     ~Cola();
-    void encolar(Elemento e);
-    Elemento inicio();
-    Elemento fin();
+    void encolar(Proceso e);
+    Proceso inicio();
+    Proceso fin();
     int colaLongitud();
-    Elemento desencolar();
+    Proceso desencolar();
     bool esVacia();
-    void mostrarCola(); /* Muestra los elementos de la cola, aunque no es correcto del todo, ya que si quieres acceder
-    a un elemento en específico de la cola, no puedes usar esta función.*/
-    void encolarPrioridad(Elemento e);
+    void mostrarCola(); /* Muestra los procesos de la cola, aunque no es correcto del todo, ya que si quieres acceder
+    a un proceso en específico de la cola, no puedes usar esta función.*/
+    void encolarPrioridad(Proceso e);
 };
 #endif // COLA_H

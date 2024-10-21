@@ -1,17 +1,17 @@
 //Pila donde se almacenan los datos por prioridades
-Al inicio, la pila está vacía, se van añadiendo elementos.
+Al inicio, la pila está vacía, se van añadiendo procesos.
 
-añadir_elemento nuestro_elemento, cola -> cola
+añadir_proceso nuestro_proceso, cola -> cola
         c_aux <- c_vacia
-        si (es_vacia? cola) entonces apilar: nuestro_elemento 
+        si (es_vacia? cola) entonces apilar: nuestro_proceso 
         sino:
-                mientras((primero:cola).prioridad >= nuestro_elemento.prioridad))
+                mientras((primero:cola).prioridad >= nuestro_proceso.prioridad))
                         e <- primero(cola)
                         eliminar (cola)
                         añadir(e, c_aux)
                 
                 finmientras
-                añadir(nuestro_elemento, c_aux)
+                añadir(nuestro_proceso, c_aux)
                 mientras !(es_vacia?cola)
                 añadir (primero(cola), c_aux)
                 finmientras
@@ -20,6 +20,6 @@ añadir_elemento nuestro_elemento, cola -> cola
 
 
 
-elemento_a_nucleo pila, cola -> 
+proceso_a_nucleo pila, cola -> 
 
 

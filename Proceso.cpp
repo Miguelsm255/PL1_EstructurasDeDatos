@@ -1,13 +1,13 @@
-#include "Elemento.h"
+#include "Proceso.h"
 
 // Implementación del constructor parametrizado
-Elemento::Elemento(int p, int PID) : prioridad(p), PID(PID)
+Proceso::Proceso(int p, int PID) : prioridad(p), PID(PID)
 {
     // Inicialización de miembros con valores proporcionados
 }
 
 // Implementación del destructor
-Elemento::~Elemento()
+Proceso::~Proceso()
 {
     // Destructor
 }

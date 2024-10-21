@@ -1,5 +1,5 @@
 #include "Cola.h"
-#include "Elemento.h"
+#include "Proceso.h"
 using namespace std;
 
 Cola::Cola()
@@ -13,7 +13,7 @@ Cola::~Cola() // Destructor de la clase Cola
 {
 }
 
-void Cola::encolar(Elemento e)
+void Cola::encolar(Proceso e)
 {
     NodoCola *nuevo = new NodoCola(e);
     if (esVacia())
@@ -29,11 +29,11 @@ void Cola::encolar(Elemento e)
     longitud++;
 }
 
-Elemento Cola::desencolar()
+Proceso Cola::desencolar()
 {
     if (!esVacia())
     {
-        Elemento elemento = primero->elemento;
+        Proceso proceso = primero->proceso;
         NodoCola *aux = primero;
 
         if ((primero == ultimo) && (primero->siguiente == NULL))
@@ -50,23 +50,23 @@ Elemento Cola::desencolar()
             delete aux;
         }
         longitud--;
-        return elemento;
+        return proceso;
     }
 }
 
-Elemento Cola::inicio()
+Proceso Cola::inicio()
 {
     if (!esVacia())
     {
-        return primero->elemento;
+        return primero->proceso;
     }
 }
 
-Elemento Cola::fin()
+Proceso Cola::fin()
 {
     if (!esVacia())
     {
-        return ultimo->elemento;
+        return ultimo->proceso;
     }
 }
 
@@ -85,13 +85,13 @@ void Cola::mostrarCola()
     NodoCola *aux = primero;
     while (aux != NULL)
     {
-        cout << aux->elemento.PID << " ";
+        cout << aux->proceso.PID << " ";
         aux = aux->siguiente;
     }
     cout << endl;
 }
 
-void Cola::encolarPrioridad(Elemento e)
+void Cola::encolarPrioridad(Proceso e)
 {
     NodoCola *nuevo = new NodoCola(e);
     if (esVacia())
@@ -102,7 +102,7 @@ void Cola::encolarPrioridad(Elemento e)
     else
     {
         Cola *Cola_aux = new Cola();
-        while (primero->elemento.prioridad >= e.prioridad)
+        while (primero->proceso.prioridad >= e.prioridad)
         {
             Cola_aux->encolar(desencolar());
         }
