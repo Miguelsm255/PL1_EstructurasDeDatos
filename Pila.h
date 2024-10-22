@@ -16,5 +16,6 @@ public:
     void desapilar();
     int mostrar();
     Proceso cimaPila();
+    void insertarTiempo(Proceso proceso);
 };
 #endif // PILA_H

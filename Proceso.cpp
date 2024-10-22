@@ -6,7 +6,7 @@ Proceso::Proceso()
 }
 
 // Implementación del constructor parametrizado
-Proceso::Proceso(int p, int PID) : prioridad(p), PID(PID)
+Proceso::Proceso(int PID, int prioridad, int tiempoInicio, int tiempoEjecucion) : prioridad(prioridad), PID(PID), tiempoInicio(tiempoInicio), tiempoEjecucion(tiempoEjecucion)
 {
     // Inicialización de miembros con valores proporcionados
 }

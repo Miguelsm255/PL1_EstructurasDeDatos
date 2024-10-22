@@ -1,13 +1,16 @@
 #ifndef ELEMENTO_H
 #define ELEMENTO_H
 
-struct Proceso
+class Proceso
 {
+public:
     int prioridad;
     int PID;
+    int tiempoInicio;
+    int tiempoEjecucion;
 
     Proceso(); // Constructor por defecto
-    Proceso(int p, int PID);
+    Proceso(int PID, int prioridad, int tiempoInicio, int tiempoEjecucion); // Constructor parametrizado
     ~Proceso(); // Destructor
 };
 

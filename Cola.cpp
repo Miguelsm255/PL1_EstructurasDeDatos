@@ -133,7 +133,7 @@ void Cola::encolarPrioridad(Proceso p)
     {
         Cola *Cola_aux = new Cola();
         // Mover elementos a Cola_aux hasta encontrar la posición correcta para p
-        while (primero != nullptr && primero->proceso.prioridad <= p.prioridad)
+        while (primero != nullptr && primero->proceso.prioridad >= p.prioridad)
         {
             Cola_aux->encolar(desencolar());
         }

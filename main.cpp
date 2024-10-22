@@ -11,25 +11,23 @@ int main(){
     Pila pila = Pila();
     Cola cola = Cola();
 
-    Proceso p1 = Proceso(1, 1);
-    Proceso p2 = Proceso(2, 2);
-    Proceso p3 = Proceso(3, 3);
-    Proceso p4 = Proceso(4, 4);
-    Proceso p5 = Proceso(5, 5);
+    Proceso p1 = Proceso(1, 1, 1, 1);
+    Proceso p2 = Proceso(2, 2, 2, 2);
+    Proceso p3 = Proceso(3, 3, 3, 3);
+    Proceso p4 = Proceso(4, 4, 4, 4);
+    Proceso p5 = Proceso(5, 5, 5, 5);
 
-    pila.apilar(p1);
-    pila.apilar(p5);
-    pila.apilar(p2);
-    pila.apilar(p4);
-    pila.apilar(p3);
-
+    pila.insertarTiempo(p5);pila.mostrar();
+    pila.insertarTiempo(p4);pila.mostrar();
+    pila.insertarTiempo(p2);pila.mostrar();
+    pila.insertarTiempo(p3);pila.mostrar();
+    pila.insertarTiempo(p1);pila.mostrar();
 
     while(!pila.esVacia()){
-        cola.encolarPrioridad(pila.cimaPila());
+        cola.encolar(pila.cimaPila());
         pila.desapilar();
+        
     }
-
-    cola.mostrarCola();
 
     return 0;
 }

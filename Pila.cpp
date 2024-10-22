@@ -32,9 +32,10 @@ void Pila::desapilar()
     if (cima)
     {
         nodo = cima;
+        cima = nodo->siguiente;
+        delete nodo;
     }
-    cima = nodo->siguiente;
-    delete nodo;
+    
 }
 
 int Pila::mostrar()
@@ -52,5 +53,36 @@ int Pila::mostrar()
 
 Proceso Pila::cimaPila()
 {
-    return cima->proceso;
+    if (!esVacia())
+    {
+        return cima->proceso;
+    }
+    return Proceso();
+}
+
+void Pila::insertarTiempo(Proceso proceso)
+{
+    if (esVacia())
+    {
+        apilar(proceso);
+    }
+    else
+    {
+        Pila *aux = new Pila();
+        while (!esVacia() && cimaPila().tiempoInicio <= proceso.tiempoInicio)
+        {
+            aux->apilar(cimaPila());
+            desapilar();
+        }
+
+        apilar(proceso);
+
+        while (!aux->esVacia())
+        {
+            apilar(aux->cimaPila());
+            aux->desapilar();
+        }
+        delete aux;
+    }
+
 }
