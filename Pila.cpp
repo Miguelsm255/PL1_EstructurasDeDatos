@@ -38,17 +38,32 @@ void Pila::desapilar()
     
 }
 
-int Pila::mostrar()
+void Pila::mostrar()
 {
-    if (esVacia())
+    // if (esVacia())
+    // {
+    //     cout << "Pila vacia" << endl;
+    // }
+    // else
+    // {
+    //     cout << "Cima pila: " << cima->proceso.PID << endl;
+    // }
+    // return 0;
+
+    if (!esVacia())
     {
-        cout << "Pila vacia" << endl;
+        NodoPila *aux = cima;
+        while (aux != NULL)
+        {
+            cout << aux->proceso.PID << " ";
+            aux = aux->siguiente;
+        }
+        cout << endl;
     }
     else
     {
-        cout << "Cima pila: " << cima->proceso.PID << endl;
+        cout << "La pila está vacía." << endl;
     }
-    return 0;
 }
 
 Proceso Pila::cimaPila()

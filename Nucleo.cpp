@@ -6,6 +6,7 @@ using namespace std;
 Nucleo::Nucleo()
 {
     colaNucleo = Cola();
+    tiempoProcesado = 0;
 }
 
 Nucleo::~Nucleo()
@@ -34,4 +35,18 @@ void Nucleo::quitarProceso()
 void Nucleo::mostrarColaNucleo()
 {
     colaNucleo.mostrarCola();
+}
+
+
+void Nucleo::actualizar()
+{
+    if(!esVacio())
+    {
+        tiempoProcesado += 1;
+        if (colaNucleo.inicio().tiempoEjecucion == tiempoProcesado)
+        {
+            quitarProceso();
+            tiempoProcesado = 0;
+        }
+    }
 }

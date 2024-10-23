@@ -14,7 +14,7 @@ public:
     bool esVacia();
     void apilar(Proceso proceso);
     void desapilar();
-    int mostrar();
+    void mostrar();
     Proceso cimaPila();
     void insertarTiempo(Proceso proceso);
 };

@@ -86,13 +86,20 @@ bool Cola::esVacia()
 
 void Cola::mostrarCola()
 {
-    NodoCola *aux = primero;
-    while (aux != NULL)
+    if (!esVacia())
     {
-        cout << aux->proceso.PID << " ";
-        aux = aux->siguiente;
+        NodoCola *aux = primero;
+        while (aux != NULL)
+        {
+            cout << aux->proceso.PID << " ";
+            aux = aux->siguiente;
+        }
+        cout << endl;
     }
-    cout << endl;
+    else
+    {
+        cout << "La cola está vacía." << endl;
+    }
 }
 
 // void Cola::encolarPrioridad(Proceso p)

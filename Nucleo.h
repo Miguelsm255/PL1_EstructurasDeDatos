@@ -7,6 +7,7 @@ class Nucleo
 {
 private:
     Cola colaNucleo;
+    int tiempoProcesado;
 public:
     Nucleo();
     ~Nucleo();
@@ -14,5 +15,6 @@ public:
     void procesar(Proceso proceso);
     void quitarProceso();
     void mostrarColaNucleo();
+    void actualizar();
 };
 #endif
