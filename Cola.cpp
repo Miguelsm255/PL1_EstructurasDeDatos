@@ -53,6 +53,7 @@ Proceso Cola::desencolar()
         longitud--;
         return proceso;
     }
+    return Proceso();
 }
 
 Proceso Cola::inicio()
@@ -61,6 +62,7 @@ Proceso Cola::inicio()
     {
         return primero->proceso;
     }
+    return Proceso();
 }
 
 Proceso Cola::fin()
@@ -69,6 +71,7 @@ Proceso Cola::fin()
     {
         return ultimo->proceso;
     }
+    return Proceso();
 }
 
 int Cola::colaLongitud()
