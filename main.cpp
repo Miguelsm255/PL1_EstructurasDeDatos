@@ -1,23 +1,91 @@
 #include <iostream>
-
 #include "Cola.h"
 #include "Pila.h"
 #include "Nucleo.h"
-
-
 using namespace std;
 
+void menuInicio();
+void menuEjecucion();
+void crearProcesosYEncolarlos();
+void ejecutar(bool manual);
+void detallesProcesosEjecucion();
+
+
+Pila pila = Pila();
+Cola cola = Cola();
+
+Nucleo n1 = Nucleo();
+Nucleo n2 = Nucleo();
+Nucleo n3 = Nucleo();
+
+
+
 int main(){
+    
+    bool salir = false;
 
-    int contador = 0;
+    while(salir == false)
+    {
+        menuInicio();
 
-    Pila pila = Pila();
-    Cola cola = Cola();
+        //1. Ingresar proceso
+        //2. Mostrar procesos
+        //3. Borrar pila de procesos
+        //4. Ejecutar manualmente
+        //5. Ejecutar automáticamente
+        //6. Salir
 
-    Nucleo n1 = Nucleo();
-    Nucleo n2 = Nucleo();
-    Nucleo n3 = Nucleo();
+        int opcion = 0;
+        cin >> opcion;
 
+        switch (opcion)
+        {
+        case 1:
+            crearProcesosYEncolarlos();
+            break;
+        case 2:
+            pila.mostrar();
+            break;
+        case 3:
+            while (!pila.esVacia())
+            {
+                pila.desapilar();;
+            }
+            break;
+        case 4:
+            ejecutar(true);
+            break;
+        case 5:
+            ejecutar(false);
+            break;
+        case 6:
+            salir = true;
+            break;
+    
+        default:
+            cout << "Opción no válida" << endl;
+            break;
+        }
+    }
+    return 0;
+}
+
+
+
+
+
+void menuInicio()
+{
+    cout << "1. Ingresar proceso" << endl;
+    cout << "2. Mostrar procesos" << endl;
+    cout << "3. Borrar pila de procesos" << endl;
+    cout << "4. Ejecutar manualmente" << endl;
+    cout << "5. Ejecutar automáticamente" << endl;
+    cout << "6. Salir" << endl;
+}
+
+void crearProcesosYEncolarlos()
+{
     Proceso a = Proceso(1, 1, 1, 6);
     Proceso b = Proceso(2, 6, 18, 4);
     Proceso c = Proceso(3, 9, 24, 2);
@@ -71,16 +139,46 @@ int main(){
     pila.insertarTiempo(x);
     pila.insertarTiempo(y);
     pila.insertarTiempo(z);
-    
 
     cout << "La pila AL PRINCIPIO es así: ", pila.mostrar();
+}
 
+void ejecutar(bool manual)
+{
+    int contador = 0;
     int sumar;
 
     while (!cola.esVacia() || !pila.esVacia() || !n1.esVacio() || !n2.esVacio() || !n3.esVacio())
     {
-        cout << "Ingrese el tiempo a sumar: ";
-        cin >> sumar;
+        if(manual)
+        {
+            menuEjecucion();
+
+            int opcion = 0;
+            cin >> opcion;
+            
+            switch (opcion)
+            {
+            case 1:
+                detallesProcesosEjecucion();
+                break;
+            case 2:
+                sumar = 1;
+                break;
+            case 3:
+                cout << "Ingrese el tiempo a sumar: ";
+                cin >> sumar;
+                break;
+            case 4:
+                manual = false;
+                break;
+            
+            default:
+                break;
+            }
+        }else{
+            sumar = 1;
+        }
 
         for (int i = 0; i < sumar; i++)
         {
@@ -126,15 +224,21 @@ int main(){
             cout << "Núcleo 3: ", n3.mostrarColaNucleo();
         }
 
+        if(!manual){
+            cout << "Se han necesitado " << contador << " unidades de tiempo para procesar todos los procesos." << endl;
+        }
     }
-
-    cola.mostrarCola();
-    n1.mostrarColaNucleo();
-    n2.mostrarColaNucleo();
-    n3.mostrarColaNucleo();
-
-    return 0;
 }
 
+void menuEjecucion()
+{
+    cout << "1. Mostrar detalles de procesos en ejecución" << endl;
+    cout << "2. Continuar" << endl;
+    cout << "3. Continuar N minutos" << endl;
+    cout << "4. Terminar Automáticamente" << endl;
+}
 
+void detallesProcesosEjecucion()
+{
 
+}
