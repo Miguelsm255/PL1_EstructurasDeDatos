@@ -6,7 +6,8 @@
 class Nucleo
 {
 private:
-    Cola colaNucleo;
+    Proceso proceso;
+    bool libre;
     int tiempoProcesado;
 public:
     Nucleo();
@@ -14,7 +15,8 @@ public:
     bool esVacio();
     void procesar(Proceso proceso);
     void quitarProceso();
-    void mostrarColaNucleo();
-    void actualizar();
+    void mostrarNucleo();
+    int actualizar();
+    void sumar();
 };
-#endif
+#endif // NUCLEO_H

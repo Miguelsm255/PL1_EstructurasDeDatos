@@ -21,5 +21,6 @@ public:
     void mostrarCola(); /* Muestra los procesos de la cola, aunque no es correcto del todo, ya que si quieres acceder
     a un proceso en específico de la cola, no puedes usar esta función.*/
     void encolarPrioridad(Proceso p);
+    void actualizar();
 };
 #endif // COLA_H

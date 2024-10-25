@@ -163,3 +163,16 @@ void Cola::encolarPrioridad(Proceso p)
     }
     longitud++;
 }
+
+void Cola::actualizar()
+{
+    if (!esVacia())
+    {
+        NodoCola *aux = primero;
+        while (aux != NULL)
+        {
+            aux->proceso.tiempoEnSO++;
+            aux = aux->siguiente;
+        }
+    }
+}
