@@ -17,6 +17,5 @@ public:
     void quitarProceso();
     void mostrarNucleo();
     int actualizar();
-    void sumar();
 };
 #endif // NUCLEO_H

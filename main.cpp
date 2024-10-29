@@ -124,64 +124,78 @@ void menuInicio()
 void definirProcesos()
 {
 
-    Proceso a = Proceso(1, 1, 1, 1);
-    Proceso b = Proceso(2, 6, 18, 4);
-    Proceso c = Proceso(3, 9, 24, 2);
-    Proceso d = Proceso(4, 4, 13, 3);
-    Proceso e = Proceso(5, 4, 24, 4);
-    Proceso f = Proceso(6, 8, 5, 5);
-    Proceso g = Proceso(7, 1, 17, 1);
-    Proceso h = Proceso(8, 9, 21, 7);
-    Proceso i = Proceso(9, 2, 27, 2);
-    Proceso j = Proceso(10, 7, 13, 5);
-    Proceso k = Proceso(11, 8, 24, 4);
-    Proceso l = Proceso(12, 3, 5, 5);
-    Proceso m = Proceso(13, 5, 15, 5);
-    Proceso n = Proceso(14, 6, 19, 1);
-    Proceso o = Proceso(15, 4, 17, 1);
-    Proceso p = Proceso(16, 2, 23, 9);
-    Proceso q = Proceso(17, 3, 13, 3);
-    Proceso r = Proceso(18, 8, 14, 4);
-    Proceso s = Proceso(19, 2, 24, 5);
-    Proceso t = Proceso(20, 5, 14, 7);
-    Proceso u = Proceso(21, 6, 18, 1);
-    Proceso v = Proceso(26, 1, 13, 7);
-    Proceso w = Proceso(23, 3, 2, 2);
-    Proceso x = Proceso(24, 3, 3, 3);
-    Proceso y = Proceso(25, 8, 4, 4);
-    Proceso z = Proceso(26, 6, 5, 5);
+    // Proceso b = Proceso(2, 6, 18, 4);
+    // Proceso a = Proceso(1, 1, 1, 1);
+    // Proceso c = Proceso(3, 9, 24, 2);
+    // Proceso d = Proceso(4, 4, 13, 3);
+    // Proceso e = Proceso(5, 4, 24, 4);
+    // Proceso f = Proceso(6, 8, 5, 5);
+    // Proceso g = Proceso(7, 1, 17, 1);
+    // Proceso h = Proceso(8, 9, 21, 7);
+    // Proceso i = Proceso(9, 2, 27, 2);
+    // Proceso j = Proceso(10, 7, 13, 5);
+    // Proceso k = Proceso(11, 8, 24, 4);
+    // Proceso l = Proceso(12, 3, 5, 5);
+    // Proceso m = Proceso(13, 5, 15, 5);
+    // Proceso n = Proceso(14, 6, 19, 1);
+    // Proceso o = Proceso(15, 4, 17, 1);
+    // Proceso p = Proceso(16, 2, 23, 9);
+    // Proceso q = Proceso(17, 3, 13, 3);
+    // Proceso r = Proceso(18, 8, 14, 4);
+    // Proceso s = Proceso(19, 2, 24, 5);
+    // Proceso t = Proceso(20, 5, 14, 7);
+    // Proceso u = Proceso(21, 6, 18, 1);
+    // Proceso v = Proceso(26, 1, 13, 7);
+    // Proceso w = Proceso(23, 3, 2, 2);
+    // Proceso x = Proceso(24, 3, 3, 3);
+    // Proceso y = Proceso(25, 8, 4, 4);
+    // Proceso z = Proceso(26, 6, 5, 5);
+
+    Proceso p1 = Proceso(1, 1, 0, 5);
+    Proceso p2 = Proceso(2, 2, 0, 3);
+    Proceso p3 = Proceso(3, 9, 0, 6);
+    Proceso p4 = Proceso(4, 5, 0, 7);
+    Proceso p5 = Proceso(5, 1, 0, 6);
+    Proceso p6 = Proceso(6, 3, 0, 8);
 
     while (!procesosDisponibles.esVacia())
     {
         procesosDisponibles.desapilar();
     }
 
-    procesosDisponibles.insertarTiempo(a);
-    procesosDisponibles.insertarTiempo(b);
-    procesosDisponibles.insertarTiempo(c);
-    procesosDisponibles.insertarTiempo(d);
-    procesosDisponibles.insertarTiempo(e);
-    procesosDisponibles.insertarTiempo(f);
-    procesosDisponibles.insertarTiempo(g);
-    procesosDisponibles.insertarTiempo(h);
-    procesosDisponibles.insertarTiempo(i);
-    procesosDisponibles.insertarTiempo(j);
-    procesosDisponibles.insertarTiempo(k);
-    procesosDisponibles.insertarTiempo(l);
-    procesosDisponibles.insertarTiempo(m);
-    procesosDisponibles.insertarTiempo(n);
-    procesosDisponibles.insertarTiempo(o);
-    procesosDisponibles.insertarTiempo(p);
-    procesosDisponibles.insertarTiempo(q);
-    procesosDisponibles.insertarTiempo(r);
-    procesosDisponibles.insertarTiempo(s);
-    procesosDisponibles.insertarTiempo(t);
-    procesosDisponibles.insertarTiempo(u);
-    procesosDisponibles.insertarTiempo(v);
-    procesosDisponibles.insertarTiempo(w);
-    procesosDisponibles.insertarTiempo(x);
-    procesosDisponibles.insertarTiempo(y);
-    procesosDisponibles.insertarTiempo(z);
+    // procesosDisponibles.insertarTiempo(a);
+    // procesosDisponibles.insertarTiempo(b);
+    // procesosDisponibles.insertarTiempo(c);
+    // procesosDisponibles.insertarTiempo(d);
+    // procesosDisponibles.insertarTiempo(e);
+    // procesosDisponibles.insertarTiempo(f);
+    // procesosDisponibles.insertarTiempo(g);
+    // procesosDisponibles.insertarTiempo(h);
+    // procesosDisponibles.insertarTiempo(i);
+    // procesosDisponibles.insertarTiempo(j);
+    // procesosDisponibles.insertarTiempo(k);
+    // procesosDisponibles.insertarTiempo(l);
+    // procesosDisponibles.insertarTiempo(m);
+    // procesosDisponibles.insertarTiempo(n);
+    // procesosDisponibles.insertarTiempo(o);
+    // procesosDisponibles.insertarTiempo(p);
+    // procesosDisponibles.insertarTiempo(q);
+    // procesosDisponibles.insertarTiempo(r);
+    // procesosDisponibles.insertarTiempo(s);
+    // procesosDisponibles.insertarTiempo(t);
+    // procesosDisponibles.insertarTiempo(u);
+    // procesosDisponibles.insertarTiempo(v);
+    // procesosDisponibles.insertarTiempo(w);
+    // procesosDisponibles.insertarTiempo(x);
+    // procesosDisponibles.insertarTiempo(y);
+    // procesosDisponibles.insertarTiempo(z);
+
+    procesosDisponibles.insertarTiempo(p1);
+    procesosDisponibles.insertarTiempo(p2);
+    procesosDisponibles.insertarTiempo(p3);
+    procesosDisponibles.insertarTiempo(p4);
+    procesosDisponibles.insertarTiempo(p5);
+    procesosDisponibles.insertarTiempo(p6);
 }
 
 void crearProcesos(int n)
@@ -254,10 +268,10 @@ void ejecutar(bool manual)
 
         for (int i = 0; i < sumar; i++)
         {
-            contador += 1;
+            
 
             cout << "__________________________" << endl;
-            cout << " * Minuto actual: " << contador << endl;
+            cout << " * Minuto actual: " << contador +1 << endl;
             cout << endl;
             
             //Saco a la cola los procesos que arrancan en este minuto
@@ -313,15 +327,16 @@ void ejecutar(bool manual)
             {
                 break;
             }
+            contador += 1;
         }
     }
 
-    cout << "Se han necesitado " << contador << " minutos para procesar todos los procesos." << endl;
+    cout << "Se han necesitado " << contador + 1 << " minutos para procesar todos los procesos." << endl;
     cout << "Se han ejecutado " << procesosEjecutados << " procesos." << endl;
 
     if (procesosEjecutados != 0)
     {
-        cout << "El tiempo medio de estancia de los procesos en el sistema operativo ha sido de " << sumaTiempos/procesosEjecutados << " minutos." << endl;
+        cout << "El tiempo medio de estancia de los procesos en el sistema operativo ha sido de " << (float)sumaTiempos/(float)procesosEjecutados << " minutos." << endl;
     }else{
         cout << "No se ha ejecutado ningún proceso." << endl;
     }
