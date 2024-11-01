@@ -77,6 +77,7 @@ Lista Lista::eliminarNodo(int posicion)
 
 Nucleo* Lista::obtenerNodo(int posicion)
 {
+
     if (!esVacia() && posicion <= longitud)
     {
         Lista aux = Lista();
@@ -86,8 +87,10 @@ Nucleo* Lista::obtenerNodo(int posicion)
             *this = resto(*this);
             posicion--;
         }
-        Nucleo* ptrNucleo = primeroPtr(*this);
-        while (aux.esVacia())
+
+        Nucleo* ptrNucleo = primeroPtr();
+
+        while (!aux.esVacia())
         {
             *this = this->añadirIzquierda(primero(aux));
             aux = resto(aux);
@@ -112,11 +115,11 @@ Lista::~Lista()
     
 }
 
-Nucleo* Lista::primeroPtr(Lista lista)
+Nucleo* Lista::primeroPtr()
 {
     if (!esVacia())
     {
-        return &lista.primeroLista;
+        return &this->primeroLista;
     }
     else
     {

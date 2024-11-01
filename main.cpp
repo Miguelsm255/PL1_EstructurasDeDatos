@@ -2,6 +2,7 @@
 #include "Cola.h"
 #include "Pila.h"
 #include "Nucleo.h"
+#include "Lista.h"
 using namespace std;
 
 void menuInicio();
@@ -9,27 +10,25 @@ void menuEjecucion();
 void crearProcesosYEncolarlos();
 void ejecutar(bool manual);
 void detallesProcesosEjecucion();
-void mostrarPilayCola();
+void mostrarPila();
 void definirProcesos();
 void crearProcesos(int n);
 
 
 Pila pila = Pila();
 Pila procesosDisponibles = Pila();
-Cola cola = Cola();
-
-Nucleo n1 = Nucleo();
-Nucleo n2 = Nucleo();
-Nucleo n3 = Nucleo();
+Lista listaNucleos = Lista();
 
 int sumaTiempos = 0;
 int procesosEjecutados = 0;
 
 int main(){
     
+    listaNucleos = listaNucleos.añadirIzquierda(Nucleo());
+
     bool salir = false;
     definirProcesos();
-
+    
     while(salir == false)
     {
         menuInicio();
@@ -124,78 +123,78 @@ void menuInicio()
 void definirProcesos()
 {
 
-    // Proceso b = Proceso(2, 6, 18, 4);
-    // Proceso a = Proceso(1, 1, 1, 1);
-    // Proceso c = Proceso(3, 9, 24, 2);
-    // Proceso d = Proceso(4, 4, 13, 3);
-    // Proceso e = Proceso(5, 4, 24, 4);
-    // Proceso f = Proceso(6, 8, 5, 5);
-    // Proceso g = Proceso(7, 1, 17, 1);
-    // Proceso h = Proceso(8, 9, 21, 7);
-    // Proceso i = Proceso(9, 2, 27, 2);
-    // Proceso j = Proceso(10, 7, 13, 5);
-    // Proceso k = Proceso(11, 8, 24, 4);
-    // Proceso l = Proceso(12, 3, 5, 5);
-    // Proceso m = Proceso(13, 5, 15, 5);
-    // Proceso n = Proceso(14, 6, 19, 1);
-    // Proceso o = Proceso(15, 4, 17, 1);
-    // Proceso p = Proceso(16, 2, 23, 9);
-    // Proceso q = Proceso(17, 3, 13, 3);
-    // Proceso r = Proceso(18, 8, 14, 4);
-    // Proceso s = Proceso(19, 2, 24, 5);
-    // Proceso t = Proceso(20, 5, 14, 7);
-    // Proceso u = Proceso(21, 6, 18, 1);
-    // Proceso v = Proceso(26, 1, 13, 7);
-    // Proceso w = Proceso(23, 3, 2, 2);
-    // Proceso x = Proceso(24, 3, 3, 3);
-    // Proceso y = Proceso(25, 8, 4, 4);
-    // Proceso z = Proceso(26, 6, 5, 5);
+    Proceso b = Proceso(2, 6, 18, 4);
+    Proceso a = Proceso(1, 1, 1, 1);
+    Proceso c = Proceso(3, 9, 24, 2);
+    Proceso d = Proceso(4, 4, 13, 3);
+    Proceso e = Proceso(5, 4, 24, 4);
+    Proceso f = Proceso(6, 8, 5, 5);
+    Proceso g = Proceso(7, 1, 17, 1);
+    Proceso h = Proceso(8, 9, 21, 7);
+    Proceso i = Proceso(9, 2, 27, 2);
+    Proceso j = Proceso(10, 7, 13, 5);
+    Proceso k = Proceso(11, 8, 24, 4);
+    Proceso l = Proceso(12, 3, 5, 5);
+    Proceso m = Proceso(13, 5, 15, 5);
+    Proceso n = Proceso(14, 6, 19, 1);
+    Proceso o = Proceso(15, 4, 17, 1);
+    Proceso p = Proceso(16, 2, 23, 9);
+    Proceso q = Proceso(17, 3, 13, 3);
+    Proceso r = Proceso(18, 8, 14, 4);
+    Proceso s = Proceso(19, 2, 24, 5);
+    Proceso t = Proceso(20, 5, 14, 7);
+    Proceso u = Proceso(21, 6, 18, 1);
+    Proceso v = Proceso(26, 1, 13, 7);
+    Proceso w = Proceso(23, 3, 2, 2);
+    Proceso x = Proceso(24, 3, 3, 3);
+    Proceso y = Proceso(25, 8, 4, 4);
+    Proceso z = Proceso(26, 6, 5, 5);
 
-    Proceso p1 = Proceso(1, 1, 0, 5);
-    Proceso p2 = Proceso(2, 2, 0, 3);
-    Proceso p3 = Proceso(3, 9, 0, 6);
-    Proceso p4 = Proceso(4, 5, 0, 7);
-    Proceso p5 = Proceso(5, 1, 0, 6);
-    Proceso p6 = Proceso(6, 3, 0, 8);
+    // Proceso p1 = Proceso(1, 1, 0, 5);
+    // Proceso p2 = Proceso(2, 2, 0, 3);
+    // Proceso p3 = Proceso(3, 9, 0, 6);
+    // Proceso p4 = Proceso(4, 5, 0, 7);
+    // Proceso p5 = Proceso(5, 1, 0, 6);
+    // Proceso p6 = Proceso(6, 3, 0, 8);
 
     while (!procesosDisponibles.esVacia())
     {
         procesosDisponibles.desapilar();
     }
 
-    // procesosDisponibles.insertarTiempo(a);
-    // procesosDisponibles.insertarTiempo(b);
-    // procesosDisponibles.insertarTiempo(c);
-    // procesosDisponibles.insertarTiempo(d);
-    // procesosDisponibles.insertarTiempo(e);
-    // procesosDisponibles.insertarTiempo(f);
-    // procesosDisponibles.insertarTiempo(g);
-    // procesosDisponibles.insertarTiempo(h);
-    // procesosDisponibles.insertarTiempo(i);
-    // procesosDisponibles.insertarTiempo(j);
-    // procesosDisponibles.insertarTiempo(k);
-    // procesosDisponibles.insertarTiempo(l);
-    // procesosDisponibles.insertarTiempo(m);
-    // procesosDisponibles.insertarTiempo(n);
-    // procesosDisponibles.insertarTiempo(o);
-    // procesosDisponibles.insertarTiempo(p);
-    // procesosDisponibles.insertarTiempo(q);
-    // procesosDisponibles.insertarTiempo(r);
-    // procesosDisponibles.insertarTiempo(s);
-    // procesosDisponibles.insertarTiempo(t);
-    // procesosDisponibles.insertarTiempo(u);
-    // procesosDisponibles.insertarTiempo(v);
-    // procesosDisponibles.insertarTiempo(w);
-    // procesosDisponibles.insertarTiempo(x);
-    // procesosDisponibles.insertarTiempo(y);
-    // procesosDisponibles.insertarTiempo(z);
+    procesosDisponibles.insertarTiempo(a);
+    procesosDisponibles.insertarTiempo(b);
+    procesosDisponibles.insertarTiempo(c);
+    procesosDisponibles.insertarTiempo(d);
+    procesosDisponibles.insertarTiempo(e);
+    procesosDisponibles.insertarTiempo(f);
+    procesosDisponibles.insertarTiempo(g);
+    procesosDisponibles.insertarTiempo(h);
+    procesosDisponibles.insertarTiempo(i);
+    procesosDisponibles.insertarTiempo(j);
+    procesosDisponibles.insertarTiempo(k);
+    procesosDisponibles.insertarTiempo(l);
+    procesosDisponibles.insertarTiempo(m);
+    procesosDisponibles.insertarTiempo(n);
+    procesosDisponibles.insertarTiempo(o);
+    procesosDisponibles.insertarTiempo(p);
+    procesosDisponibles.insertarTiempo(q);
+    procesosDisponibles.insertarTiempo(r);
+    procesosDisponibles.insertarTiempo(s);
+    procesosDisponibles.insertarTiempo(t);
+    procesosDisponibles.insertarTiempo(u);
+    procesosDisponibles.insertarTiempo(v);
+    procesosDisponibles.insertarTiempo(w);
+    procesosDisponibles.insertarTiempo(x);
+    procesosDisponibles.insertarTiempo(y);
+    procesosDisponibles.insertarTiempo(z);
 
-    procesosDisponibles.insertarTiempo(p1);
-    procesosDisponibles.insertarTiempo(p2);
-    procesosDisponibles.insertarTiempo(p3);
-    procesosDisponibles.insertarTiempo(p4);
-    procesosDisponibles.insertarTiempo(p5);
-    procesosDisponibles.insertarTiempo(p6);
+    // procesosDisponibles.insertarTiempo(p1);
+    // procesosDisponibles.insertarTiempo(p2);
+    // procesosDisponibles.insertarTiempo(p3);
+    // procesosDisponibles.insertarTiempo(p4);
+    // procesosDisponibles.insertarTiempo(p5);
+    // procesosDisponibles.insertarTiempo(p6);
 }
 
 void crearProcesos(int n)
@@ -223,7 +222,7 @@ void ejecutar(bool manual)
     int contador = 0;
     int sumar = 0;
 
-    while (!cola.esVacia() || !pila.esVacia() || !n1.esVacio() || !n2.esVacio() || !n3.esVacio())
+    while (!pila.esVacia() || (listaNucleos.longitudLista() != 1 && !listaNucleos.primero(listaNucleos).esVacio()))
     {
         if(manual)
         {
@@ -274,56 +273,77 @@ void ejecutar(bool manual)
             cout << " * Minuto actual: " << contador +1 << endl;
             cout << endl;
             
-            //Saco a la cola los procesos que arrancan en este minuto
+            //Saco a los núcleos los procesos que arrancan en este minuto
             while (pila.cimaPila().tiempoInicio == contador && !pila.esVacia())
             {
-                cola.encolarPrioridad(pila.cimaPila());
+                // Compruebo si están todos llenos
+                bool llenos = true;
+                for (int i = 0; i < listaNucleos.longitudLista(); i++)
+                {
+                    if (listaNucleos.obtenerNodo(i)->NdeProcesosEnCola() <= 3)
+                    {
+                        llenos = false;
+                    }
+                    cout << "hemos hecho la comprobación de si está lleno" << endl;
+                }
+                // Si es así, añado un nuevo núcleo
+                if (llenos)
+                {
+                    listaNucleos = listaNucleos.añadirIzquierda(Nucleo());
+                    cout << "hemos añadido un nuevo núcleo" << endl;
+                }
+
+
+                // Compruebo cual es el núcleo con menos procesos en cola y encolo
+                Nucleo* menor = listaNucleos.obtenerNodo(1);
+                for (int i = 0; i < listaNucleos.longitudLista(); i++)
+                {
+                    if (listaNucleos.obtenerNodo(i)->NdeProcesosEnCola() < menor->NdeProcesosEnCola())
+                    {
+                        menor = listaNucleos.obtenerNodo(i);
+                    }
+                }
+                menor->encolarProceso(pila.cimaPila());
+                cout << "hemos encolado el proceso en el núcleo con menos procesos en cola" << endl;
+
                 pila.desapilar();
             }
+            cout << "he metido los procesos en las colas" << endl;
 
-            // Asigno procesos a los núcleos si están libres
-            if (n1.esVacio() && !cola.esVacia()){
-                n1.procesar(cola.desencolar());
-            }
-            if (n2.esVacio() && !cola.esVacia()){
-                n2.procesar(cola.desencolar());
-            }
-            if (n3.esVacio() && !cola.esVacia()){
-                n3.procesar(cola.desencolar());
-            }
+            for (int i = 0; i < listaNucleos.longitudLista(); i++)
+            {
+                if (listaNucleos.obtenerNodo(i)->esVacio() && !listaNucleos.obtenerNodo(i)->obtenerColaNucleo()->esVacia())
+                {
+                    listaNucleos.obtenerNodo(i)->procesar(listaNucleos.obtenerNodo(i)->obtenerColaNucleo()->desencolar());
+                }
+            }   
+
 
             if (!manual)
             {
-                mostrarPilayCola();
+                mostrarPila();
                 detallesProcesosEjecucion();
                 cout << endl;
             }
 
-            int t1 = n1.actualizar();
-            int t2 = n2.actualizar();
-            int t3 = n3.actualizar();
+            
+            for (int i = 0; i < listaNucleos.longitudLista(); i++)
+            {
+                int tiempo = listaNucleos.obtenerNodo(i)->actualizar();
+                if (tiempo != 0)
+                {
+                    procesosEjecutados += 1;
+                }
+                sumaTiempos += tiempo;
+            }
 
-
+            for (int i = 0; i < listaNucleos.longitudLista(); i++)
+            {
+                listaNucleos.obtenerNodo(i)->obtenerColaNucleo()->actualizar();
+            }
             
 
-            sumaTiempos += t1 + t2 + t3;
-
-            if (t1 != 0)
-            {
-                procesosEjecutados += 1;
-            }
-            if (t2 != 0)
-            {
-                procesosEjecutados += 1;
-            }
-            if (t3 != 0)
-            {
-                procesosEjecutados += 1;
-            }
-
-            cola.actualizar(); 
-
-            if (cola.esVacia() && pila.esVacia() && n1.esVacio() && n2.esVacio() && n3.esVacio())
+            if (pila.esVacia() && (listaNucleos.longitudLista() == 1 && listaNucleos.primero(listaNucleos).esVacio()))
             {
                 break;
             }
@@ -363,18 +383,15 @@ void menuEjecucion()
 
 void detallesProcesosEjecucion()
 {
-    cout << "- Proceso en ejecución en núcleo 1: " << endl;
-    n1.mostrarNucleo();
-    cout << "- Proceso en ejecución en núcleo 2: " << endl;
-    n2.mostrarNucleo();
-    cout << "- Proceso en ejecución en núcleo 3: " << endl;
-    n3.mostrarNucleo();
-    cout << endl;
+    for (int i = 0; i < listaNucleos.longitudLista(); i++)
+    {
+        cout << "- Proceso en ejecución en núcleo " << i+1 << ": " << endl;
+        listaNucleos.obtenerNodo(i)->mostrarNucleo();
+    }
 }
 
-void mostrarPilayCola()
+void mostrarPila()
 {
     cout << "La pila ahora es así: ", pila.mostrar();
-    cout << "La cola ahora es así: ", cola.mostrarCola();
     cout << endl;
 }
