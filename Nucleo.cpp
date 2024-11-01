@@ -97,3 +97,8 @@ Cola* Nucleo::obtenerColaNucleo()
 {
     return &colaProcesos;
 }
+
+void Nucleo::mostrarColaNucleo()
+{
+    colaProcesos.mostrarCola();
+}

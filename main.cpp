@@ -270,7 +270,7 @@ void ejecutar(bool manual)
             
 
             cout << "__________________________" << endl;
-            cout << " * Minuto actual: " << contador +1 << endl;
+            cout << " * Minuto actual: " << contador << endl;
             cout << endl;
             
             //Saco a los núcleos los procesos que arrancan en este minuto
@@ -298,6 +298,7 @@ void ejecutar(bool manual)
                 Nucleo* menor = listaNucleos.obtenerNodo(1);
                 for (int i = 0; i < listaNucleos.longitudLista(); i++)
                 {
+                    listaNucleos.obtenerNodo(i)->mostrarColaNucleo();
                     if (listaNucleos.obtenerNodo(i)->NdeProcesosEnCola() < menor->NdeProcesosEnCola())
                     {
                         menor = listaNucleos.obtenerNodo(i);
