@@ -20,6 +20,6 @@ public:
     Lista eliminarNodo(int posicion);
     Lista añadirIzquierda(Nucleo nucleo);
     int longitudLista();
-    Nucleo* primeroPtr(Lista lista);
+    Nucleo* primeroPtr();
 };
 #endif // NODOCOLA_H
