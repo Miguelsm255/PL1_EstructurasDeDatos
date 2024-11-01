@@ -7,6 +7,7 @@ Nucleo::Nucleo()
 {
     proceso = Proceso();
     libre = true;
+    colaProcesos = Cola();
     tiempoProcesado = 0;
 }
 

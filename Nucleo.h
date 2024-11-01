@@ -9,13 +9,17 @@ private:
     Proceso proceso;
     bool libre;
     int tiempoProcesado;
+    Cola colaProcesos;
 public:
     Nucleo();
     ~Nucleo();
     bool esVacio();
     void procesar(Proceso proceso);
+    void encolarProceso(Proceso proceso);
     void quitarProceso();
     void mostrarNucleo();
+    void mostrarColaNucleo();
+    int procesosEnCola();
     int actualizar();
 };
 #endif // NUCLEO_H
