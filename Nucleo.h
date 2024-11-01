@@ -19,7 +19,8 @@ public:
     void quitarProceso();
     void mostrarNucleo();
     void mostrarColaNucleo();
-    int procesosEnCola();
+    int NdeProcesosEnCola();
     int actualizar();
+    Cola* obtenerColaNucleo();
 };
 #endif // NUCLEO_H

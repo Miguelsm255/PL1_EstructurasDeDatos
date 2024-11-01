@@ -16,8 +16,10 @@ public:
     bool esVacia();
     Lista resto(Lista lista);
     Nucleo primero(Lista lista);
+    Nucleo* obtenerNodo(int posicion);
     Lista eliminarNodo(int posicion);
     Lista añadirIzquierda(Nucleo nucleo);
     int longitudLista();
+    Nucleo* primeroPtr(Lista lista);
 };
 #endif // NODOCOLA_H

@@ -75,6 +75,33 @@ Lista Lista::eliminarNodo(int posicion)
     return *this;
 }
 
+Nucleo* Lista::obtenerNodo(int posicion)
+{
+    if (!esVacia() && posicion <= longitud)
+    {
+        Lista aux = Lista();
+        while (posicion > 1)
+        {
+            aux = aux.añadirIzquierda(primero(*this));
+            *this = resto(*this);
+            posicion--;
+        }
+        Nucleo* ptrNucleo = primeroPtr(*this);
+        while (aux.esVacia())
+        {
+            *this = this->añadirIzquierda(primero(aux));
+            aux = resto(aux);
+        }
+        return ptrNucleo;
+    }
+    else if(posicion > longitud)
+    {
+        cout << "La posición no existe" << endl;
+        return NULL;
+    }
+    return NULL;
+}
+
 int Lista::longitudLista()
 {
     return longitud;
@@ -83,4 +110,16 @@ int Lista::longitudLista()
 Lista::~Lista()
 {
     
+}
+
+Nucleo* Lista::primeroPtr(Lista lista)
+{
+    if (!esVacia())
+    {
+        return &lista.primeroLista;
+    }
+    else
+    {
+        return NULL;
+    }
 }

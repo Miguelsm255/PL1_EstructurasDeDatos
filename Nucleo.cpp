@@ -82,3 +82,18 @@ int Nucleo::actualizar()
         return 0;
     }
 }
+
+int Nucleo::NdeProcesosEnCola()
+{
+    return colaProcesos.colaLongitud();
+}
+
+void Nucleo::encolarProceso(Proceso p)
+{
+    colaProcesos.encolarPrioridad(p);
+}
+
+Cola* Nucleo::obtenerColaNucleo()
+{
+    return &colaProcesos;
+}
