@@ -1,15 +1,18 @@
 #include "Lista.h"
 #include "Proceso.h"
+#include "Pila.h"
 using namespace std;
 
 Lista::Lista()
 {
+    vacia = true;
     restoListaPtr = NULL;
     longitud = 0;
 }
 
 Lista::Lista(Nucleo nucleo, Lista *resto)
 {
+    vacia = false;
     primeroLista = nucleo;
     this->restoListaPtr = resto;
     longitud = resto->longitud + 1;
@@ -17,12 +20,17 @@ Lista::Lista(Nucleo nucleo, Lista *resto)
 
 bool Lista::esVacia()
 {
-    return restoListaPtr == NULL;
+    return vacia;
 }
 
-Lista Lista::añadirIzquierda(Nucleo nucleo)
+Lista* Lista::añadirIzquierda(Nucleo nucleo)
 {
-    return Lista(nucleo, this);
+    return new Lista(nucleo, this);
+    // Lista *nuevaLista = new Lista(nucleo, this);
+    // *this = *nuevaLista;
+    // delete nuevaLista;
+    // this->longitud += 1;
+    
 }
 
 Nucleo Lista::primero(Lista lista)
@@ -49,60 +57,157 @@ Lista Lista::resto(Lista lista)
     }
 }
 
+// Lista Lista::eliminarNodo(int posicion)
+// {
+//     if (!esVacia() && posicion <= longitud)
+//     {
+//         Lista aux = Lista();
+//         while (posicion > 1)
+//         {
+//             aux = aux.añadirIzquierda(primero(*this));
+//             *this = resto(*this);
+//             posicion--;
+//         }
+//         aux = resto(aux);
+//         while (!aux.esVacia())
+//         {
+//             this->longitud -= 1;
+//             *this = this->añadirIzquierda(primero(aux));
+//             aux = resto(aux);
+//         }
+        
+//     }
+//     else if(posicion > longitud)
+//     {
+//         cout << "La posición no existe" << endl;
+//     }
+//     return *this;
+// }
+
+// FALTA IR RESTANDO 1 A LA LONGITUD DE LAS LISTAS POR LAS QUE VOY PASANDO
 Lista Lista::eliminarNodo(int posicion)
 {
     if (!esVacia() && posicion <= longitud)
     {
-        Lista aux = Lista();
-        while (posicion > 0)
+        if (posicion == 1)
         {
-            aux = aux.añadirIzquierda(primero(*this));
-            *this = resto(*this);
-            posicion--;
+            Lista* temp = this->restoListaPtr;
+            *this = *temp;
+            delete temp;
         }
-        aux = resto(aux);
-        while (aux.esVacia())
+        else if (posicion == 2)
         {
-            *this = this->añadirIzquierda(primero(aux));
-            aux = resto(aux);
+            Lista* temp = this->restoListaPtr->restoListaPtr;
+            delete this->restoListaPtr;
+            this->restoListaPtr = temp;
+            this->longitud--;
         }
-        this->longitud -= 1;
+        else
+        {
+            Lista* p = this;
+            Lista* ultimo;
+            for (int i = 2; i < posicion; i++)
+            {
+                p->longitud--;
+                p = p->restoListaPtr;
+                if (p->restoListaPtr->restoListaPtr == NULL)
+                {
+                    ultimo = p;
+                }
+            }
+
+            if (p->restoListaPtr == NULL)
+            {
+                delete p;
+                ultimo->restoListaPtr = NULL;
+            }
+            else
+            {
+                Lista* q = p->restoListaPtr->restoListaPtr;
+                delete p->restoListaPtr;
+                p->restoListaPtr = q;
+            }
+        }
+
     }
-    else if(posicion > longitud)
+    if (longitud == 0)
     {
-        cout << "La posición no existe" << endl;
+        vacia = true;
+
     }
     return *this;
 }
 
+Lista* Lista::restoPtr(Lista lista)
+{
+    if (!esVacia())
+    {
+        return lista.restoListaPtr;
+    }
+    else
+    {
+        return NULL;
+    }
+}
+
+void Lista::mostrarLista(Lista lista)
+{
+    while (!lista.esVacia())
+    {
+        cout << lista.primero(lista).getID() << ", ";
+        lista = lista.resto(lista);
+    }
+    cout << endl;
+}
+
+
+
+// Nucleo* Lista::obtenerNodo(int posicion)
+// {
+
+//     if (!esVacia() && posicion <= longitud)
+//     {
+//         Lista aux = Lista();
+//         while (posicion > 1)
+//         {
+//             aux = aux.añadirIzquierda(primero(*this));
+//             *this = resto(*this);
+//             posicion--;
+//         }
+
+//         Nucleo* ptrNucleo = primeroPtr();
+
+//         while (!aux.esVacia())
+//         {
+//             *this = this->añadirIzquierda(primero(aux));
+//             aux = resto(aux);
+//         }
+//         return ptrNucleo;
+//     }
+//     else if(posicion > longitud)
+//     {
+//         cout << "La posición no existe" << endl;
+//         return NULL;
+//     }
+//     return NULL;
+// }
+
 Nucleo* Lista::obtenerNodo(int posicion)
 {
-
     if (!esVacia() && posicion <= longitud)
     {
-        Lista aux = Lista();
-        while (posicion > 1)
+        Lista* p = this;
+        for (int i = 1; i < posicion; i++)
         {
-            aux = aux.añadirIzquierda(primero(*this));
-            *this = resto(*this);
-            posicion--;
+            p = p->restoListaPtr;
         }
-
-        Nucleo* ptrNucleo = primeroPtr();
-
-        while (!aux.esVacia())
-        {
-            *this = this->añadirIzquierda(primero(aux));
-            aux = resto(aux);
-        }
-        return ptrNucleo;
+        return p->primeroPtr();
     }
-    else if(posicion > longitud)
+    else
     {
         cout << "La posición no existe" << endl;
         return NULL;
     }
-    return NULL;
 }
 
 int Lista::longitudLista()

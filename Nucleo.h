@@ -10,8 +10,10 @@ private:
     bool libre;
     int tiempoProcesado;
     Cola colaProcesos;
+    int ID;
 public:
     Nucleo();
+    Nucleo(int id);
     ~Nucleo();
     bool esVacio();
     void procesar(Proceso proceso);
@@ -22,5 +24,6 @@ public:
     int NdeProcesosEnCola();
     int actualizar();
     Cola* obtenerColaNucleo();
+    int getID();
 };
 #endif // NUCLEO_H

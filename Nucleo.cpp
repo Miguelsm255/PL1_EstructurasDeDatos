@@ -9,6 +9,16 @@ Nucleo::Nucleo()
     libre = true;
     colaProcesos = Cola();
     tiempoProcesado = 0;
+    ID = 0;
+}
+
+Nucleo::Nucleo(int id)
+{
+    proceso = Proceso();
+    libre = true;
+    colaProcesos = Cola();
+    tiempoProcesado = 0;
+    ID = id;
 }
 
 Nucleo::~Nucleo()
@@ -101,4 +111,9 @@ Cola* Nucleo::obtenerColaNucleo()
 void Nucleo::mostrarColaNucleo()
 {
     colaProcesos.mostrarCola();
+}
+
+int Nucleo::getID()
+{
+    return ID;
 }

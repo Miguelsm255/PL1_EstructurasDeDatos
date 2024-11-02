@@ -7,19 +7,23 @@ class Lista
 {
 private:
     Nucleo primeroLista;
-    Lista *restoListaPtr;
+    
     int longitud;
+    bool vacia;
 public:
+Lista *restoListaPtr;
     Lista();
     Lista(Nucleo nucleo, Lista *resto = new Lista());
     ~Lista();
     bool esVacia();
     Lista resto(Lista lista);
+    Lista* restoPtr(Lista lista);
     Nucleo primero(Lista lista);
     Nucleo* obtenerNodo(int posicion);
     Lista eliminarNodo(int posicion);
-    Lista añadirIzquierda(Nucleo nucleo);
+    Lista* añadirIzquierda(Nucleo nucleo);
     int longitudLista();
     Nucleo* primeroPtr();
+    void mostrarLista(Lista lista);
 };
 #endif // NODOCOLA_H
