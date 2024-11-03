@@ -7,7 +7,18 @@ Nucleo::Nucleo()
 {
     proceso = Proceso();
     libre = true;
+    colaProcesos = new Cola();
     tiempoProcesado = 0;
+    ID = 0;
+}
+
+Nucleo::Nucleo(int id)
+{
+    proceso = Proceso();
+    libre = true;
+    colaProcesos = new Cola();
+    tiempoProcesado = 0;
+    ID = id;
 }
 
 Nucleo::~Nucleo()
@@ -80,4 +91,29 @@ int Nucleo::actualizar()
     }else{
         return 0;
     }
+}
+
+int Nucleo::NdeProcesosEnCola()
+{
+    return colaProcesos->colaLongitud();
+}
+
+void Nucleo::encolarProceso(Proceso p)
+{
+    colaProcesos->encolarPrioridad(p);
+}
+
+Cola* Nucleo::obtenerColaNucleo()
+{
+    return colaProcesos;
+}
+
+void Nucleo::mostrarColaNucleo()
+{
+    colaProcesos->mostrarCola();
+}
+
+int Nucleo::getID()
+{
+    return ID;
 }
