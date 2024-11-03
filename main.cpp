@@ -291,7 +291,7 @@ void ejecutar(bool manual)
                         llenos = false;
                         cout << "Núcleo " << j << " no está lleno, tiene " << listaNucleos->obtenerNodo(j)->NdeProcesosEnCola() << " procesos en cola." << endl;
                         cout << "Cola de núcleo " << j << ": ";
-                        //listaNucleos->obtenerNodo(j)->mostrarColaNucleo();
+                        listaNucleos->obtenerNodo(j)->mostrarColaNucleo();
                         cout << endl;
                     }
                     
@@ -308,12 +308,12 @@ void ejecutar(bool manual)
 
                 cout << "-----PARA ENCOLAR COMPRUEBO CUAL ES EL NÚCLEO CON MENOS COLA-----" << endl;
 
-                                        //for (int j = 0; j < listaNucleos->longitudLista(); j++)
-                                        //{
-                                        //    cout << "Cola de núcleo " << j+1 << ": ";
-                                        //    listaNucleos->obtenerNodo(j)->mostrarColaNucleo();
-                                        //    cout << endl;
-                                        //}
+                                        for (int j = 1; j <= listaNucleos->longitudLista(); j++)
+                                        {
+                                            cout << "Cola de núcleo " << j << ": ";
+                                            listaNucleos->obtenerNodo(j)->mostrarColaNucleo();
+                                            cout << endl;
+                                        }
 
                 // Compruebo cual es el núcleo con menos procesos en cola y encolo
                 Nucleo* menor = listaNucleos->obtenerNodo(1);
@@ -330,15 +330,22 @@ void ejecutar(bool manual)
                 cout << endl;
                 cout << "Encolo en el menor" << endl;
 
+                                        for (int j = 1; j <= listaNucleos->longitudLista(); j++)
+                                        {
+                                            cout << "Cola de núcleo " << j << ": ";
+                                            listaNucleos->obtenerNodo(j)->mostrarColaNucleo();
+                                            cout << endl;
+                                        }
+
                 pila.desapilar();
             }
-                                        //if (listaNucleos->longitudLista() < 0){
-                                        //for (int j = 1; j <= listaNucleos->longitudLista(); j++)
-                                        //{
-                                        //    cout << "Cola de núcleo " << j << ": ";
-                                        //    listaNucleos->obtenerNodo(j)->mostrarColaNucleo();
-                                        //    cout << endl;
-                                        //}}
+                                        if (listaNucleos->longitudLista() < 0){
+                                        for (int j = 1; j <= listaNucleos->longitudLista(); j++)
+                                        {
+                                            cout << "Cola de núcleo " << j << ": ";
+                                            listaNucleos->obtenerNodo(j)->mostrarColaNucleo();
+                                            cout << endl;
+                                        }}
 
             for (int j = 1; j <= listaNucleos->longitudLista(); j++)
             {
@@ -349,24 +356,25 @@ void ejecutar(bool manual)
                 }
             }  
 
-                                        //if (listaNucleos->longitudLista() < 0){
-                                        //for (int j = 1; j <= listaNucleos->longitudLista(); j++)
-                                        //{
-                                        //    cout << "Cola de núcleo " << j << ": ";
-                                        //    listaNucleos->obtenerNodo(j)->mostrarColaNucleo();
-                                        //    cout << endl;
-                                        //}}
+                                        if (listaNucleos->longitudLista() < 0){
+                                        for (int j = 1; j <= listaNucleos->longitudLista(); j++)
+                                        {
+                                            cout << "Cola de núcleo " << j << ": ";
+                                            listaNucleos->obtenerNodo(j)->mostrarColaNucleo();
+                                            cout << endl;
+                                        }}
 
 
             if (!manual)
             {
+                
+                                        for (int j = 1; j <= listaNucleos->longitudLista(); j++)
+                                        {
+                                            cout << "Cola de núcleo " << j << ": ";
+                                            listaNucleos->obtenerNodo(j)->mostrarColaNucleo();
+                                            cout << endl;
+                                        }
                 mostrarPila();
-                                        //for (int j = 1; j <= listaNucleos->longitudLista(); j++)
-                                        //{
-                                        //    cout << "Cola de núcleo " << j << ": ";
-                                        //    listaNucleos->obtenerNodo(j)->mostrarColaNucleo();
-                                        //    cout << endl;
-                                        //}
                 detallesProcesosEjecucion();
                 cout << endl;
             }
@@ -430,9 +438,9 @@ void menuEjecucion()
 
 void detallesProcesosEjecucion()
 {
-    for (int i = 0; i < listaNucleos->longitudLista(); i++)
+    for (int i = 1; i <= listaNucleos->longitudLista(); i++)
     {
-        cout << "- Proceso en ejecución en núcleo " << i+1 << ": " << endl;
+        cout << "- Proceso en ejecución en núcleo " << i << ": " << endl;
         listaNucleos->obtenerNodo(i)->mostrarNucleo();
     }
 }
