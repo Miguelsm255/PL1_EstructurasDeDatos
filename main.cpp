@@ -17,14 +17,14 @@ void crearProcesos(int n);
 
 Pila pila = Pila();
 Pila procesosDisponibles = Pila();
-Lista listaNucleos = Lista();
+Lista* listaNucleos = new Lista();
 
 int sumaTiempos = 0;
 int procesosEjecutados = 0;
 
 int main(){
     
-    listaNucleos = listaNucleos.añadirIzquierda(Nucleo());
+    //listaNucleos->añadirIzquierda(Nucleo());
 
     bool salir = false;
     definirProcesos();
@@ -222,7 +222,7 @@ void ejecutar(bool manual)
     int contador = 0;
     int sumar = 0;
 
-    while (!pila.esVacia() || (listaNucleos.longitudLista() != 1 && !listaNucleos.primero(listaNucleos).esVacio()))
+    while (!pila.esVacia() || (listaNucleos->longitudLista() != 1 && !listaNucleos->primeroPtr()->esVacio()))
     {
         if(manual)
         {
@@ -272,65 +272,111 @@ void ejecutar(bool manual)
             cout << "__________________________" << endl;
             cout << " * Minuto actual: " << contador << endl;
             cout << endl;
-            
+
+            mostrarPila();
+
+
             //Saco a los núcleos los procesos que arrancan en este minuto
             while (pila.cimaPila().tiempoInicio == contador && !pila.esVacia())
             {
+                cout << "-----COMPRUEBO SI LOS NÚCLEOS ESTÁN LLENOS-----" << endl;
+                cout << endl;
+
                 // Compruebo si están todos llenos
                 bool llenos = true;
-                for (int i = 0; i < listaNucleos.longitudLista(); i++)
+                for (int j = 1; j <= listaNucleos->longitudLista(); j++)
                 {
-                    if (listaNucleos.obtenerNodo(i)->NdeProcesosEnCola() <= 3)
+                    if (listaNucleos->obtenerNodo(j)->NdeProcesosEnCola() < 3)
                     {
                         llenos = false;
+                        cout << "Núcleo " << j << " no está lleno, tiene " << listaNucleos->obtenerNodo(j)->NdeProcesosEnCola() << " procesos en cola." << endl;
+                        cout << "Cola de núcleo " << j << ": ";
+                        //listaNucleos->obtenerNodo(j)->mostrarColaNucleo();
+                        cout << endl;
                     }
-                    cout << "hemos hecho la comprobación de si está lleno" << endl;
+                    
                 }
                 // Si es así, añado un nuevo núcleo
                 if (llenos)
                 {
-                    listaNucleos = listaNucleos.añadirIzquierda(Nucleo());
-                    cout << "hemos añadido un nuevo núcleo" << endl;
+                    listaNucleos = listaNucleos->añadirIzquierda(Nucleo());
+                    cout << "Están todos llenos, hemos añadido un nuevo núcleo" << endl;
+                    cout << "Ahora hay " << listaNucleos->longitudLista() << " núcleos" << endl;
                 }
+                cout << endl;
 
+
+                cout << "-----PARA ENCOLAR COMPRUEBO CUAL ES EL NÚCLEO CON MENOS COLA-----" << endl;
+
+                                        //for (int j = 0; j < listaNucleos->longitudLista(); j++)
+                                        //{
+                                        //    cout << "Cola de núcleo " << j+1 << ": ";
+                                        //    listaNucleos->obtenerNodo(j)->mostrarColaNucleo();
+                                        //    cout << endl;
+                                        //}
 
                 // Compruebo cual es el núcleo con menos procesos en cola y encolo
-                Nucleo* menor = listaNucleos.obtenerNodo(1);
-                for (int i = 0; i < listaNucleos.longitudLista(); i++)
+                Nucleo* menor = listaNucleos->obtenerNodo(1);
+                for (int j = 1; j <= listaNucleos->longitudLista(); j++)
                 {
-                    listaNucleos.obtenerNodo(i)->mostrarColaNucleo();
-                    if (listaNucleos.obtenerNodo(i)->NdeProcesosEnCola() < menor->NdeProcesosEnCola())
+                    
+                    if (listaNucleos->obtenerNodo(j)->NdeProcesosEnCola() < menor->NdeProcesosEnCola())
                     {
-                        menor = listaNucleos.obtenerNodo(i);
+                        cout << "El núcleo " << j << " tiene menos procesos en cola" << endl;
+                        menor = listaNucleos->obtenerNodo(j);
                     }
                 }
                 menor->encolarProceso(pila.cimaPila());
-                cout << "hemos encolado el proceso en el núcleo con menos procesos en cola" << endl;
+                cout << endl;
+                cout << "Encolo en el menor" << endl;
 
                 pila.desapilar();
             }
-            cout << "he metido los procesos en las colas" << endl;
+                                        //if (listaNucleos->longitudLista() < 0){
+                                        //for (int j = 1; j <= listaNucleos->longitudLista(); j++)
+                                        //{
+                                        //    cout << "Cola de núcleo " << j << ": ";
+                                        //    listaNucleos->obtenerNodo(j)->mostrarColaNucleo();
+                                        //    cout << endl;
+                                        //}}
 
-            for (int i = 0; i < listaNucleos.longitudLista(); i++)
+            for (int j = 1; j <= listaNucleos->longitudLista(); j++)
             {
-                if (listaNucleos.obtenerNodo(i)->esVacio() && !listaNucleos.obtenerNodo(i)->obtenerColaNucleo()->esVacia())
+                if (listaNucleos->obtenerNodo(j)->esVacio() && !listaNucleos->obtenerNodo(j)->obtenerColaNucleo().esVacia())
                 {
-                    listaNucleos.obtenerNodo(i)->procesar(listaNucleos.obtenerNodo(i)->obtenerColaNucleo()->desencolar());
+                    cout << "Pongo a porcesar el proceso en el núcleo " << j << endl;
+                    listaNucleos->obtenerNodo(j)->procesar(listaNucleos->obtenerNodo(j)->obtenerColaNucleo().desencolar());
                 }
-            }   
+            }  
+
+                                        //if (listaNucleos->longitudLista() < 0){
+                                        //for (int j = 1; j <= listaNucleos->longitudLista(); j++)
+                                        //{
+                                        //    cout << "Cola de núcleo " << j << ": ";
+                                        //    listaNucleos->obtenerNodo(j)->mostrarColaNucleo();
+                                        //    cout << endl;
+                                        //}}
 
 
             if (!manual)
             {
                 mostrarPila();
+                                        //for (int j = 1; j <= listaNucleos->longitudLista(); j++)
+                                        //{
+                                        //    cout << "Cola de núcleo " << j << ": ";
+                                        //    listaNucleos->obtenerNodo(j)->mostrarColaNucleo();
+                                        //    cout << endl;
+                                        //}
                 detallesProcesosEjecucion();
                 cout << endl;
             }
+            
+                                        
 
             
-            for (int i = 0; i < listaNucleos.longitudLista(); i++)
+            for (int j = 1; j <= listaNucleos->longitudLista(); j++)
             {
-                int tiempo = listaNucleos.obtenerNodo(i)->actualizar();
+                int tiempo = listaNucleos->obtenerNodo(j)->actualizar();
                 if (tiempo != 0)
                 {
                     procesosEjecutados += 1;
@@ -338,13 +384,13 @@ void ejecutar(bool manual)
                 sumaTiempos += tiempo;
             }
 
-            for (int i = 0; i < listaNucleos.longitudLista(); i++)
+            for (int j = 1; j <= listaNucleos->longitudLista(); j++)
             {
-                listaNucleos.obtenerNodo(i)->obtenerColaNucleo()->actualizar();
+                listaNucleos->obtenerNodo(j)->obtenerColaNucleo().actualizar();
             }
             
 
-            if (pila.esVacia() && (listaNucleos.longitudLista() == 1 && listaNucleos.primero(listaNucleos).esVacio()))
+            if (pila.esVacia() && (listaNucleos->longitudLista() == 1 && listaNucleos->primeroPtr()->esVacio()))
             {
                 break;
             }
@@ -384,10 +430,10 @@ void menuEjecucion()
 
 void detallesProcesosEjecucion()
 {
-    for (int i = 0; i < listaNucleos.longitudLista(); i++)
+    for (int i = 0; i < listaNucleos->longitudLista(); i++)
     {
         cout << "- Proceso en ejecución en núcleo " << i+1 << ": " << endl;
-        listaNucleos.obtenerNodo(i)->mostrarNucleo();
+        listaNucleos->obtenerNodo(i)->mostrarNucleo();
     }
 }
 

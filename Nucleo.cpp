@@ -103,9 +103,9 @@ void Nucleo::encolarProceso(Proceso p)
     colaProcesos.encolarPrioridad(p);
 }
 
-Cola* Nucleo::obtenerColaNucleo()
+Cola Nucleo::obtenerColaNucleo()
 {
-    return &colaProcesos;
+    return colaProcesos;
 }
 
 void Nucleo::mostrarColaNucleo()
