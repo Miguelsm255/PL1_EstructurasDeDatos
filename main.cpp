@@ -396,6 +396,24 @@ void ejecutar(bool manual)
             {
                 listaNucleos->obtenerNodo(j)->obtenerColaNucleo()->actualizar();
             }
+
+            int nucleosVacios = 0;
+            for (int j = 1; j <= listaNucleos->longitudLista(); j++)
+            {
+                if (listaNucleos->obtenerNodo(j)->esVacio() && listaNucleos->obtenerNodo(j)->obtenerColaNucleo()->esVacia())
+                {
+                    nucleosVacios += 1;
+                }
+            }
+
+            for (int j = 1; j <= listaNucleos->longitudLista(); j++)
+            {
+                if (listaNucleos->obtenerNodo(j)->esVacio() && listaNucleos->obtenerNodo(j)->obtenerColaNucleo()->esVacia() && nucleosVacios > 2)
+                {
+                    listaNucleos = listaNucleos->eliminarNodo(j);
+                    nucleosVacios -= 1;
+                }
+            }
             
 
             if (pila.esVacia() && (listaNucleos->longitudLista() == 1 && listaNucleos->primeroPtr()->esVacio()))

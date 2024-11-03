@@ -7,11 +7,10 @@ class Lista
 {
 private:
     Nucleo primeroLista;
-    
+    Lista* restoListaPtr;
     int longitud;
     bool vacia;
 public:
-Lista *restoListaPtr;
     Lista();
     Lista(Nucleo nucleo, Lista *resto = new Lista());
     ~Lista();
@@ -20,7 +19,7 @@ Lista *restoListaPtr;
     Lista* restoPtr(Lista lista);
     Nucleo primero(Lista lista);
     Nucleo* obtenerNodo(int posicion);
-    Lista eliminarNodo(int posicion);
+    Lista* eliminarNodo(int posicion);
     Lista* añadirIzquierda(Nucleo nucleo);
     Lista* añadirDerecha(Nucleo nucleo);
     int longitudLista();
