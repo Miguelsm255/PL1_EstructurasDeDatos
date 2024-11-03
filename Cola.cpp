@@ -76,7 +76,21 @@ Proceso Cola::fin()
 
 int Cola::colaLongitud()
 {
-    return longitud;
+    if (esVacia())
+    {
+        return 0;
+    }
+    else
+    {
+        int l = 1;
+        NodoCola *aux = primero;
+        while (aux != ultimo)
+        {
+            l++;
+            aux = aux->siguiente;
+        }
+        return l;
+    }
 }
 
 bool Cola::esVacia()
