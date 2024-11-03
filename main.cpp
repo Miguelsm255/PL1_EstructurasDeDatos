@@ -342,10 +342,10 @@ void ejecutar(bool manual)
 
             for (int j = 1; j <= listaNucleos->longitudLista(); j++)
             {
-                if (listaNucleos->obtenerNodo(j)->esVacio() && !listaNucleos->obtenerNodo(j)->obtenerColaNucleo().esVacia())
+                if (listaNucleos->obtenerNodo(j)->esVacio() && !listaNucleos->obtenerNodo(j)->obtenerColaNucleo()->esVacia())
                 {
                     cout << "Pongo a porcesar el proceso en el núcleo " << j << endl;
-                    listaNucleos->obtenerNodo(j)->procesar(listaNucleos->obtenerNodo(j)->obtenerColaNucleo().desencolar());
+                    listaNucleos->obtenerNodo(j)->procesar(listaNucleos->obtenerNodo(j)->obtenerColaNucleo()->desencolar());
                 }
             }  
 
@@ -386,7 +386,7 @@ void ejecutar(bool manual)
 
             for (int j = 1; j <= listaNucleos->longitudLista(); j++)
             {
-                listaNucleos->obtenerNodo(j)->obtenerColaNucleo().actualizar();
+                listaNucleos->obtenerNodo(j)->obtenerColaNucleo()->actualizar();
             }
             
 
