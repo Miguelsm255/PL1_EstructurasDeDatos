@@ -24,7 +24,7 @@ int procesosEjecutados = 0;
 
 int main(){
     
-    //listaNucleos->añadirIzquierda(Nucleo());
+    //listaNucleos->añadirDerecha(Nucleo());
 
     bool salir = false;
     definirProcesos();
@@ -299,7 +299,7 @@ void ejecutar(bool manual)
                 // Si es así, añado un nuevo núcleo
                 if (llenos)
                 {
-                    listaNucleos = listaNucleos->añadirIzquierda(Nucleo());
+                    listaNucleos = listaNucleos->añadirDerecha(Nucleo());
                     cout << "Están todos llenos, hemos añadido un nuevo núcleo" << endl;
                     cout << "Ahora hay " << listaNucleos->longitudLista() << " núcleos" << endl;
                 }

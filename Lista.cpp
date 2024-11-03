@@ -33,6 +33,28 @@ Lista* Lista::añadirIzquierda(Nucleo nucleo)
     
 }
 
+Lista* Lista::añadirDerecha(Nucleo nucleo)
+{
+    if (esVacia())
+    {
+        primeroLista = nucleo;
+        restoListaPtr = new Lista();
+        vacia = false;
+        longitud = 1;
+    }
+    else
+    {
+        Lista* p = this;
+        while (p->restoListaPtr != NULL && !p->restoListaPtr->esVacia())
+        {
+            p = p->restoListaPtr;
+        }
+        p->restoListaPtr = new Lista(nucleo, new Lista());
+        longitud++;
+    }
+    return this;
+}
+
 Nucleo Lista::primero(Lista lista)
 {
     if (!esVacia())

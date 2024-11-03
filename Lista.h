@@ -22,6 +22,7 @@ Lista *restoListaPtr;
     Nucleo* obtenerNodo(int posicion);
     Lista eliminarNodo(int posicion);
     Lista* añadirIzquierda(Nucleo nucleo);
+    Lista* añadirDerecha(Nucleo nucleo);
     int longitudLista();
     Nucleo* primeroPtr();
     void mostrarLista(Lista lista);
