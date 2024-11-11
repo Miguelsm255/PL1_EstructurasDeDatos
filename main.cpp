@@ -221,9 +221,10 @@ void ejecutar(bool manual)
 {
     int contador = 0;
     int sumar = 0;
+    bool vacio = false;
 
     // Mientras que existan procesos en la pila o en los núcleos
-    while (!pila.esVacia() || (listaNucleos->longitudLista() != 1 && !listaNucleos->primeroPtr()->esVacio()))
+    while (!pila.esVacia() || !vacio)
     {
         if(manual) // si es manual, se muestra el menú
         {
@@ -437,13 +438,17 @@ void ejecutar(bool manual)
                     nucleosVacios -= 1; // resto 1 a nucelosVacios
                 }
             }
-            
-            // Si la pila está vacía y todos los núcleos están vacíos, termino
-            if (pila.esVacia() && (listaNucleos->longitudLista() == 1 && listaNucleos->primeroPtr()->esVacio()))
-            {
-                break;
-            }
 
+            // Compruebo si todos los núcleos están vacíos
+            vacio = true;
+            for (int i = 1; i <= listaNucleos->longitudLista(); i++)
+            {
+                if (listaNucleos->obtenerNodo(i)->NdeProcesosEnCola() != 0 || !listaNucleos->obtenerNodo(i)->esVacio())
+                {
+                    vacio = false;
+                }
+            }
+            
             // Sumo 1 al contador (ha pasado un minuto)
             contador += 1;
         }
