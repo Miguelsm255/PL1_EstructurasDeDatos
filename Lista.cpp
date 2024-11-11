@@ -3,7 +3,7 @@
 #include "Pila.h"
 using namespace std;
 
-Lista::Lista()
+Lista::Lista()  
 {
     vacia = true;
     restoListaPtr = NULL;
@@ -23,29 +23,34 @@ bool Lista::esVacia()
     return vacia;
 }
 
-Lista* Lista::añadirIzquierda(Nucleo nucleo)
+Lista* Lista::añadirIzquierda(Nucleo nucleo)    // añade un nodo a la izquierda
 {
-    return new Lista(nucleo, this);    
-}
+    return new Lista(nucleo, this);     // crea una lista nueva con el núcleo a la izquierda y la
+}                                       // lista antigua como resto y lo devuelve
+       
 
-Lista* Lista::añadirDerecha(Nucleo nucleo)
+Lista* Lista::añadirDerecha(Nucleo nucleo)   // añade un nodo a la derecha
 {
-    if (esVacia())
+    if (esVacia())  // si la lista está vacía
     {
-        primeroLista = nucleo;
-        restoListaPtr = new Lista();
-        vacia = false;
-        longitud = 1;
+        primeroLista = nucleo;  // el primer nodo es el núcleo
+        restoListaPtr = new Lista();    // el resto es una lista vacía
+        vacia = false;  // la lista ya no está vacía
+        longitud = 1;   // la longitud es 1
     }
-    else
+    else    // si la lista no está vacía
     {
-        Lista* p = this;
-        while (p->restoListaPtr != NULL && !p->restoListaPtr->esVacia())
+        Lista* p = this;    // creo un puntero a la lista
+
+        // mientras que el siguiente nodo no sea NULL y la lista no esté vacía (hasta que no llego al final)
+        while (p->restoListaPtr != NULL && !p->restoListaPtr->esVacia())    
         {
-            p = p->restoListaPtr;
+            p = p->restoListaPtr;   // avanzo en la lista
+            
         }
-        p->restoListaPtr = new Lista(nucleo, new Lista());
-        longitud++;
+        p->longitud++; // aumento la longitud a cada uno de los nodos
+        p->restoListaPtr = new Lista(nucleo, new Lista());  // añado el núcleo al final de la lista
+        
     }
     return this;
 }
