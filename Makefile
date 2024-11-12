@@ -1,7 +1,7 @@
 # Makefile básico para un proyecto C++
 
 # Nombre del ejecutable
-TARGET = prueba
+TARGET = main
 
 # Compilador y flags
 CXX = g++

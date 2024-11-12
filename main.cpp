@@ -309,6 +309,27 @@ void ejecutar(bool manual)
                 }
                 cout << endl;
 
+                // Si el nucleo está vacío y su lista tiene procesos esperando, pongo el primero a procesar
+                for (int j = 1; j <= listaNucleos->longitudLista(); j++) // por cada núcleo
+                {
+                    // aquí se hace la comprobación de si el núcleo está vacío y tiene procesos en cola
+                    if (listaNucleos->obtenerNodo(j)->esVacio() && !listaNucleos->obtenerNodo(j)->obtenerColaNucleo()->esVacia())
+                    {
+                        cout << "Pongo a porcesar el proceso en el núcleo " << j << endl;
+                        listaNucleos->obtenerNodo(j)->procesar(listaNucleos->obtenerNodo(j)->obtenerColaNucleo()->desencolar());
+                    }
+                }  
+
+                        // SOLO VISUAL
+                        if (listaNucleos->longitudLista() < 0){
+                        for (int j = 1; j <= listaNucleos->longitudLista(); j++)
+                        {
+                            cout << "Cola de núcleo " << j << ": ";
+                            listaNucleos->obtenerNodo(j)->mostrarColaNucleo();
+                            cout << endl;
+                        }}
+
+
 
                 cout << "-----PARA ENCOLAR COMPRUEBO CUAL ES EL NÚCLEO CON MENOS COLA-----" << endl;
 
@@ -331,7 +352,16 @@ void ejecutar(bool manual)
                         menor = listaNucleos->obtenerNodo(j); // el núcleo j es el nuevo menor
                     }
                 }
-                menor->encolarProceso(pila.cimaPila()); // encolo el proceso en el núcleo menor
+
+                if (menor->NdeProcesosEnCola() == 0 && menor->esVacio())
+                {
+                    menor->procesar(pila.cimaPila()); // lo pongo a procesar directamente
+                }
+                else
+                {
+                    menor->encolarProceso(pila.cimaPila()); // encolo el proceso en el núcleo menor
+                }
+                
                 cout << endl;
                 cout << "Encolo en el menor" << endl;
 
@@ -355,26 +385,7 @@ void ejecutar(bool manual)
                             cout << endl;
                         }}
 
-            // Si el nucleo está vacío y su lista tiene procesos esperando, pongo el primero a procesar
-            for (int j = 1; j <= listaNucleos->longitudLista(); j++) // por cada núcleo
-            {
-                // aquí se hace la comprobación de si el núcleo está vacío y tiene procesos en cola
-                if (listaNucleos->obtenerNodo(j)->esVacio() && !listaNucleos->obtenerNodo(j)->obtenerColaNucleo()->esVacia())
-                {
-                    cout << "Pongo a porcesar el proceso en el núcleo " << j << endl;
-                    listaNucleos->obtenerNodo(j)->procesar(listaNucleos->obtenerNodo(j)->obtenerColaNucleo()->desencolar());
-                }
-            }  
-
-                        // SOLO VISUAL
-                        if (listaNucleos->longitudLista() < 0){
-                        for (int j = 1; j <= listaNucleos->longitudLista(); j++)
-                        {
-                            cout << "Cola de núcleo " << j << ": ";
-                            listaNucleos->obtenerNodo(j)->mostrarColaNucleo();
-                            cout << endl;
-                        }}
-
+            
 
             if (!manual)
             {
