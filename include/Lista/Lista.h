@@ -1,6 +1,6 @@
 #ifndef LISTA_H
 #define LISTA_H
-#include "Nucleo.h"
+#include "../Nucleo/Nucleo.h"
 #include <iostream>
 
 class Lista
