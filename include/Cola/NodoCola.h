@@ -1,6 +1,6 @@
 #ifndef NODOCOLA_H
 #define NODOCOLA_H
-#include "Proceso.h"
+#include "../Proceso/Proceso.h"
 #include <iostream>
 class NodoCola
 {

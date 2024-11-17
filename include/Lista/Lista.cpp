@@ -1,6 +1,6 @@
 #include "Lista.h"
-#include "Proceso.h"
-#include "Pila.h"
+#include "../Proceso/Proceso.h"
+#include "../Pila/Pila.h"
 using namespace std;
 
 Lista::Lista()  

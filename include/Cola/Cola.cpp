@@ -1,6 +1,6 @@
 #include "Cola.h"
 #include "NodoCola.h"
-#include "Proceso.h"
+#include "../Proceso/Proceso.h"
 using namespace std;
 
 Cola::Cola()

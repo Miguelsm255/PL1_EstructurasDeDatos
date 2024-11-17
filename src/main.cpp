@@ -1,8 +1,8 @@
 #include <iostream>
-#include "Cola.h"
-#include "Pila.h"
-#include "Nucleo.h"
-#include "Lista.h"
+#include "../include/Proceso/Proceso.h"
+#include "../include/Pila/Pila.h"
+#include "../include/Nucleo/Nucleo.h"
+#include "../include/Lista/Lista.h"
 using namespace std;
 
 void menuInicio();

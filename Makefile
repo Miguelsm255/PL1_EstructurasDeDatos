@@ -7,15 +7,16 @@ TARGET = main
 CXX = g++
 CXXFLAGS = -Wall -Wextra -std=c++23
 
-# Archivos fuente
-SRCS = $(wildcard **.cpp)
+# Archivos fuente y ejecutable
+SRCS = $(wildcard src/*.cpp) $(wildcard include/**/*.cpp)
 
 # Regla por defecto
 all: $(TARGET)
 
-# Regla para compilar el ejecutable directamente desde los archivos fuente
+# Regla para construir el ejecutable
 $(TARGET): $(SRCS)
-	$(CXX) $(CXXFLAGS) -o $@ $^
+	@echo "Compiling and linking $(TARGET)..."
+	$(CXX) $(CXXFLAGS) $(SRCS) -o $@
 
 # Regla para limpiar archivos generados
 clean:

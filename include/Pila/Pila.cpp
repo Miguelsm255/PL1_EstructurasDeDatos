@@ -1,6 +1,6 @@
 #include "Pila.h"
 #include "NodoPila.h"
-#include "Proceso.h"
+#include "../Proceso/Proceso.h"
 using namespace std;
 
 Pila::Pila()

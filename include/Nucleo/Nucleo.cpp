@@ -1,6 +1,6 @@
 #include "Nucleo.h"
-#include "Proceso.h"
-#include "Cola.h"
+#include "../Proceso/Proceso.h"
+#include "../Cola/Cola.h"
 using namespace std;
 
 Nucleo::Nucleo()

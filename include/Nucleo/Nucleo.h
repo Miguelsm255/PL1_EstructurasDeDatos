@@ -1,7 +1,7 @@
 #ifndef NUCLEO_H
 #define NUCLEO_H
-#include "Proceso.h"
-#include "Cola.h"
+#include "../Proceso/Proceso.h"
+#include "../Cola/Cola.h"
 
 class Nucleo
 {
