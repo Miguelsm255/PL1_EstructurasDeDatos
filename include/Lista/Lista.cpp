@@ -45,12 +45,12 @@ Lista* Lista::añadirDerecha(Nucleo nucleo)   // añade un nodo a la derecha
         // mientras que el siguiente nodo no sea NULL y la lista no esté vacía (hasta que no llego al final)
         while (p->restoListaPtr != NULL && !p->restoListaPtr->esVacia())    
         {
+            p->longitud++; // aumento la longitud a cada uno de los nodos
             p = p->restoListaPtr;   // avanzo en la lista
             
         }
-        
+        p->longitud++;
         p->restoListaPtr = new Lista(nucleo, new Lista());  // añado el núcleo al final de la lista
-        longitud++; // aumento la longitud a cada uno de los nodos
     }
     return this;    // devuelvo la lista
 }
