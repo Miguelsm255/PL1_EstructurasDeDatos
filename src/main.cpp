@@ -37,6 +37,8 @@ int main(){
 
     bool salir = false;
     definirProcesos();
+    listaNucleos = listaNucleos->añadirDerecha(Nucleo());
+    listaNucleos = listaNucleos->añadirDerecha(Nucleo());
     
     while(salir == false)
     {
@@ -322,7 +324,7 @@ void ejecutar(bool manual)
             desencolarYProcesar();
 
             //Saco a los núcleos los procesos que arrancan en este minuto
-            while (pila.cimaPila().tiempoInicio == contador && !pila.esVacia())
+            while (!pila.esVacia() && pila.cimaPila().tiempoInicio == contador)
             {
                 cout << "++++++++++ SALE EL PROCESO NÚMERO " << pila.cimaPila().PID << " ++++++++++" << endl << endl;
                 hacerHueco();
@@ -485,27 +487,14 @@ void actualizarColasyNucleos()
 
 void eliminarNucleosVacios()
 {
-    // Para comprobar cuántos núcleos vacíos hay, y si hay más de 2, elimino hasta que queden 2.
-    int nucleosVacios = 0;
-
-    for (int j = 1; j <= listaNucleos->longitudLista(); j++) // por cada núcleo
-    {
-        // si está vacío y su cola está vacía
-        if (listaNucleos->obtenerNodo(j)->esVacio() && listaNucleos->obtenerNodo(j)->obtenerColaNucleo()->esVacia())
-        {
-            nucleosVacios += 1; // sumo 1 a nucleosVacios
-        }
-    }
-
     // compruebo el valor de nucleosVacios. Si hay más de 2, elimino núcleos vacíos hasta que queden 2
     for (int j = 1; j <= listaNucleos->longitudLista(); j++) // por cada núcleo
     {
         // si está vacío y nucleosVacios es mayor que 2
-        if (listaNucleos->obtenerNodo(j)->esVacio() && listaNucleos->obtenerNodo(j)->obtenerColaNucleo()->esVacia() && nucleosVacios > 2)
+        if (listaNucleos->obtenerNodo(j)->esVacio() && listaNucleos->obtenerNodo(j)->obtenerColaNucleo()->esVacia() && listaNucleos->longitudLista() > 2)
         {
             cout << "Elimino núcleo " << j << endl;
             listaNucleos = listaNucleos->eliminarNodo(j); // elimino el núcleo
-            nucleosVacios -= 1; // resto 1 a nucelosVacios
         }
     }
 }
