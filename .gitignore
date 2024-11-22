@@ -3,5 +3,7 @@ AAA_PREGUNTAR.txt
 menú.txt
 prueba_listas
 prueba_listas.cpp
+prueba_arbol.cpp
 main
 .idea
+.vscode

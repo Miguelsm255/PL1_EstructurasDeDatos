@@ -8,14 +8,24 @@ ListaProcesos::ListaProcesos()
     vacia = true;
     restoListaProcesosPtr = NULL;
     longitud = 0;
+    prioridad = -1;
 }
 
-ListaProcesos::ListaProcesos(Proceso proceso, ListaProcesos *resto)
+ListaProcesos::ListaProcesos(int pr)  
+{
+    vacia = true;
+    restoListaProcesosPtr = NULL;
+    longitud = 0;
+    prioridad = pr;
+}
+
+ListaProcesos::ListaProcesos(int pr, Proceso proceso, ListaProcesos *resto)
 {
     vacia = false;
     primeroListaProcesos = proceso;
     this->restoListaProcesosPtr = resto;
     longitud = resto->longitud + 1;
+    prioridad = pr;
 }
 
 bool ListaProcesos::esVacia()
@@ -25,7 +35,7 @@ bool ListaProcesos::esVacia()
 
 ListaProcesos* ListaProcesos::añadirIzquierda(Proceso proceso)    // añade un nodo a la izquierda
 {
-    return new ListaProcesos(proceso, this);     // crea una lista nueva con el núcleo a la izquierda y la
+    return new ListaProcesos(proceso.prioridad, proceso, this);     // crea una lista nueva con el núcleo a la izquierda y la
 }                                       // lista antigua como resto y lo devuelve
        
 
@@ -34,7 +44,7 @@ ListaProcesos* ListaProcesos::añadirDerecha(Proceso proceso)   // añade un nod
     if (esVacia())  // si la lista está vacía
     {
         primeroListaProcesos = proceso;  // el primer nodo es el núcleo
-        restoListaProcesosPtr = new ListaProcesos();    // el resto es una lista vacía
+        restoListaProcesosPtr = new ListaProcesos(proceso.prioridad);    // el resto es una lista vacía
         vacia = false;  // la lista ya no está vacía
         longitud = 1;   // la longitud es 1
     }
@@ -50,7 +60,7 @@ ListaProcesos* ListaProcesos::añadirDerecha(Proceso proceso)   // añade un nod
             
         }
         p->longitud++;
-        p->restoListaProcesosPtr = new ListaProcesos(proceso, new ListaProcesos());  // añado el núcleo al final de la lista
+        p->restoListaProcesosPtr = new ListaProcesos(proceso.prioridad, proceso, new ListaProcesos(p->prioridad));  // añado el núcleo al final de la lista
     }
     return this;    // devuelvo la lista
 }
@@ -75,7 +85,7 @@ ListaProcesos ListaProcesos::resto(ListaProcesos lista) // devuelve el resto de 
     }
     else
     {
-        return ListaProcesos(); // si la lista está vacía, devuelvo una lista vacía
+        return ListaProcesos(-1); // si la lista está vacía, devuelvo una lista vacía
     }
 }
 
@@ -194,4 +204,9 @@ Proceso* ListaProcesos::primeroPtr() // devuelve el puntero al primer nodo
     {
         return NULL;    // si la lista está vacía, devuelvo NULL
     }
+}
+
+int ListaProcesos::obtenerPrioridad()
+{
+    return prioridad;
 }
