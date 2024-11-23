@@ -59,24 +59,12 @@ void ABBProcesos::setRaiz(Proceso proceso)
     this->obtenerRaiz()->añadirDerecha(proceso);
 }
 
-void ABBProcesos::setProcesoIzquierda(Proceso proceso)
-{
-    this->izquierda = new ABBProcesos(proceso.prioridad);
-    this->obtenerIzquierda()->obtenerRaiz()->añadirDerecha(proceso);
-}
-
-void ABBProcesos::setProcesoDerecha(Proceso proceso)
-{
-    this->derecha = new ABBProcesos(proceso.prioridad);
-    this->obtenerDerecha()->obtenerRaiz()->añadirDerecha(proceso);
-}
-
-void ABBProcesos::setArbolIzquierda(ABBProcesos* nuevoIzquierda)
+void ABBProcesos::setIzquierda(ABBProcesos* nuevoIzquierda)
 {
     this->izquierda = nuevoIzquierda;
 }
 
-void ABBProcesos::setArbolDerecha(ABBProcesos* nuevoDerecha)
+void ABBProcesos::setDerecha(ABBProcesos* nuevoDerecha)
 {
     this->derecha = nuevoDerecha;
 }
@@ -85,46 +73,72 @@ void ABBProcesos::setArbolDerecha(ABBProcesos* nuevoDerecha)
 
 
 
-ABBProcesos* insertarRecursivo(ABBProcesos* arbol, Proceso proceso)
+ABBProcesos* buscarPosicion(ABBProcesos* arbol, int prioridad)
 {
-    if (arbol->obtenerRaiz()->obtenerPrioridad() == proceso.prioridad)
+    if (arbol == nullptr) {
+        return nullptr;
+    } else {
+        if (arbol->obtenerRaiz()->obtenerPrioridad() == prioridad) {
+            return arbol;
+        } else {
+            if (prioridad <= arbol->obtenerRaiz()->obtenerPrioridad()) {
+                return buscarPosicion(arbol->obtenerIzquierda(), prioridad);
+            } else {
+                return buscarPosicion(arbol->obtenerDerecha(), prioridad);
+            }
+        }
+    }
+}
+
+ABBProcesos* buscarPadre(int prioridad, ABBProcesos* arbol)
+{
+    if (arbol == nullptr) {
+        return nullptr;
+    } else {
+        if (prioridad <= arbol->obtenerRaiz()->obtenerPrioridad()) {
+            if (arbol->obtenerIzquierda() == nullptr) {
+                return arbol;
+            } else {
+                return buscarPadre(prioridad, arbol->obtenerIzquierda());
+            }
+        } else {
+            if (arbol->obtenerDerecha() == nullptr) {
+                return arbol;
+            } else {
+                return buscarPadre(prioridad, arbol->obtenerDerecha());
+            }
+        }
+    }
+}
+
+
+
+
+
+ABBProcesos* crearNodo(ABBProcesos* arbol, int prioridad)
+{
+    if (prioridad <= arbol->obtenerRaiz()->obtenerPrioridad())
     {
-        arbol->setRaiz(proceso);
+        arbol->setIzquierda(new ABBProcesos(prioridad));
+        return arbol->obtenerIzquierda();
     }
     else
     {
-        if (proceso.prioridad <= arbol->obtenerRaiz()->obtenerPrioridad())
-        {
-            if (arbol->obtenerIzquierda() == nullptr)
-            {
-                arbol->setProcesoIzquierda(proceso);
-            }
-            else
-            {
-                ABBProcesos* nuevaIzquierda = insertarRecursivo(arbol->obtenerIzquierda(), proceso);
-                arbol->setArbolIzquierda(nuevaIzquierda);
-            }
-        }
-        else
-        {
-            if (arbol->obtenerDerecha() == nullptr)
-            {
-                arbol->setProcesoDerecha(proceso);
-            }
-            else
-            {
-                ABBProcesos* nuevaDerecha = insertarRecursivo(arbol->obtenerDerecha(), proceso);
-                arbol->setArbolDerecha(nuevaDerecha);
-            }
-        }
+        arbol->setDerecha(new ABBProcesos(prioridad));
+        return arbol->obtenerDerecha();
     }
-    return arbol;
+}
+
+ABBProcesos* insertarEn(ABBProcesos* arbol, int prioridad)
+{
+    ABBProcesos* raiz = buscarPosicion(arbol, prioridad);
+    if (raiz == nullptr) {
+        raiz = crearNodo(buscarPadre(prioridad, arbol), prioridad);
+    }
+    return raiz;
 }
 
 void ABBProcesos::insertar(Proceso proceso)
 {
-    ABBProcesos* arbolInsertado = insertarRecursivo(this, proceso);
-    this->raiz = arbolInsertado->raiz;
-    this->izquierda = arbolInsertado->izquierda;
-    this->derecha = arbolInsertado->derecha;
+    insertarEn(this, proceso.prioridad)->setRaiz(proceso);
 }

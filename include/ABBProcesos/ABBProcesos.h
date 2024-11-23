@@ -23,12 +23,11 @@ class ABBProcesos
         ABBProcesos* obtenerIzquierda();
         ABBProcesos* obtenerDerecha();
         void setRaiz(Proceso proceso);
-        void setProcesoIzquierda(Proceso proceso);
-        void setProcesoDerecha(Proceso proceso);
-        void setArbolIzquierda(ABBProcesos*);
-        void setArbolDerecha(ABBProcesos*);
+        void setIzquierda(ABBProcesos*);
+        void setDerecha(ABBProcesos*);
 
         void insertar(Proceso proceso);
+        ListaProcesos obtenerPrioridadEspecifica(int prioridad);
 
         void mostrarInOrden();
         void mostrarPreOrden();
