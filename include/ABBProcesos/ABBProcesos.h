@@ -22,17 +22,23 @@ class ABBProcesos
         ListaProcesos* obtenerRaiz();
         ABBProcesos* obtenerIzquierda();
         ABBProcesos* obtenerDerecha();
-        void setRaiz(Proceso proceso);
+        void setRaiz(ListaProcesos listaProcesos);
         void setIzquierda(ABBProcesos*);
         void setDerecha(ABBProcesos*);
 
         void insertar(Proceso proceso);
-        ListaProcesos obtenerPrioridadEspecifica(int prioridad);
+        void borrarNodo(int prioridad, ABBProcesos* arbol);
+        ABBProcesos copiarArbol(ABBProcesos* arbol);
+
+        ABBProcesos* obtenerNodoMenor();
+        ABBProcesos* obtenerNodoMayor();
+        ABBProcesos* obtenerNodoEspecifico(int prioridad);
+        int obtenerPrioridadMenor();
+        int obtenerPrioridadMayor();
+        ListaProcesos* obtenerPrioridadEspecifica(int prioridad);
+        
 
         void mostrarInOrden();
-        void mostrarPreOrden();
-        void mostrarPostOrden();
-        int obtenerAlutra();
 };
 
 #endif // ABB_PROCESOS_H
