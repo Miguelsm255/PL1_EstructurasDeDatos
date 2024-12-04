@@ -7,26 +7,15 @@ using namespace std;
 
 void menuInicio();
 void menuEjecucion();
-void crearProcesosYEncolarlos();
-void detallesProcesosEjecucion();
-void mostrarPila();
 void definirProcesos();
 void crearProcesos(int n);
-
+void imprimirPila();
 void ejecutar(bool manual);
-void desencolarYProcesar();
-void hacerHueco();
-void encolarEnElMenor();
-Nucleo* NucleoConMenosProcesos();
-void actualizarColasyNucleos();
-void eliminarNucleosVacios();
-void mostrarColasDeNucleos();
-bool nucleosVacios();
 
 
 Pila pila = Pila();
 Pila procesosDisponibles = Pila();
-Lista* listaNucleos = new Lista();
+ListaNucleos* listaNucleos = new ListaNucleos();
 
 int sumaTiempos = 0;
 int procesosEjecutados = 0;
@@ -37,8 +26,8 @@ int main(){
 
     bool salir = false;
     definirProcesos();
-    listaNucleos = listaNucleos->añadirDerecha(Nucleo());
-    listaNucleos = listaNucleos->añadirDerecha(Nucleo());
+    listaNucleos->añadirDerecha(Nucleo());
+    listaNucleos->añadirDerecha(Nucleo());
     
     while(salir == false)
     {
@@ -114,7 +103,12 @@ int main(){
 
 
 
-
+void imprimirPila()
+{
+    cout << "La pila actual es esta: " << endl;
+    pila.mostrar();
+    cout << endl;
+}
 
 void menuInicio()
 {
@@ -243,24 +237,6 @@ void menuEjecucion()
     cout << "Ingrese una opción: ";
 }
 
-void detallesProcesosEjecucion()
-{
-    for (int i = 1; i <= listaNucleos->longitudLista(); i++) // por cada núcleo
-    {
-        cout << "- Proceso en ejecución en núcleo " << i << ": " << endl;
-        listaNucleos->obtenerNodo(i)->mostrarNucleo(); // Imprime el proceso en ejecución
-    }
-}
-
-void mostrarPila()
-{
-    cout << "La pila ahora es así: ", pila.mostrar();
-    cout << endl;
-}
-
-
-
-
 void ejecutar(bool manual)
 {
     int contador = 0;
@@ -286,7 +262,7 @@ void ejecutar(bool manual)
             switch (opcion) 
             {
             case 1: // si la opción es 1, se muestran los detalles de los procesos en ejecución
-                detallesProcesosEjecucion();
+                listaNucleos->detallesProcesosEjecucion();
                 sumar = 0;
                 break;
             case 2: // si la opción es 2, se avanza un minuto
@@ -320,31 +296,31 @@ void ejecutar(bool manual)
             cout << " * Minuto actual: " << contador << endl;
             cout << endl;
 
-            mostrarPila(); // SOLO VISUAL
-            desencolarYProcesar();
+            imprimirPila();
+            listaNucleos->desencolarYProcesar();
 
             //Saco a los núcleos los procesos que arrancan en este minuto
             while (!pila.esVacia() && pila.cimaPila().tiempoInicio == contador)
             {
                 cout << "++++++++++ SALE EL PROCESO NÚMERO " << pila.cimaPila().PID << " ++++++++++" << endl << endl;
-                hacerHueco();
-                encolarEnElMenor();
+                listaNucleos->hacerHueco();
+                listaNucleos->encolarEnElMenor(&pila);
                 pila.desapilar();
             }
 
             // SOLO VISUAL
             if (!manual)
             {
-                mostrarColasDeNucleos();
-                mostrarPila();
-                detallesProcesosEjecucion();
+                listaNucleos->mostrarColasDeNucleos();
+                imprimirPila();
+                listaNucleos->detallesProcesosEjecucion();
                 cout << endl;
             }
 
-            actualizarColasyNucleos();
-            eliminarNucleosVacios();
+            listaNucleos->actualizarColasyNucleos(&sumaTiempos, &procesosEjecutados);
+            listaNucleos->eliminarNucleosVacios();
 
-            vacio = nucleosVacios();
+            vacio = listaNucleos->nucleosVacios() && pila.esVacia();
             
             // Sumo 1 al contador (ha pasado un minuto)
             contador += 1;
@@ -368,176 +344,4 @@ void ejecutar(bool manual)
     sumaTiempos = 0;
     procesosEjecutados = 0;
     definirProcesos();
-}
-
-void desencolarYProcesar()
-{
-    // Si el nucleo está vacío y su lista tiene procesos esperando, pongo el primero a procesar
-    for (int j = 1; j <= listaNucleos->longitudLista(); j++) // por cada núcleo
-    {
-        // aquí se hace la comprobación de si el núcleo está vacío y tiene procesos en cola
-        if (listaNucleos->obtenerNodo(j)->esVacio() && !listaNucleos->obtenerNodo(j)->obtenerColaNucleo()->esVacia())
-        {
-            cout << "Pongo a porcesar el proceso en el núcleo " << j << endl;
-            listaNucleos->obtenerNodo(j)->procesar(listaNucleos->obtenerNodo(j)->obtenerColaNucleo()->desencolar());
-        }
-    }
-    cout << endl;
-}
-
-void hacerHueco()
-{
-    cout << "-----COMPRUEBO SI LOS NÚCLEOS ESTÁN LLENOS-----" << endl;
-    cout << endl;
-    // Compruebo si están todos llenos
-    bool llenos = true;
-    for (int j = 1; j <= listaNucleos->longitudLista(); j++) // por cada núcleo
-    {
-        if (listaNucleos->obtenerNodo(j)->NdeProcesosEnCola() < 3) // si un nucleo tiene - de 3 procesos (no lleno)
-        {
-            llenos = false; // no están todos llenos
-            cout << "Núcleo " << j << " no está lleno, tiene " << listaNucleos->obtenerNodo(j)->NdeProcesosEnCola() << " procesos en cola." << endl;
-            cout << "Cola de núcleo " << j << ": ";
-            listaNucleos->obtenerNodo(j)->mostrarColaNucleo();
-            cout << endl;
-        }
-        
-    }
-
-    // Si están todos llenos, añado un nuevo núcleo
-    if (llenos)
-    {
-        listaNucleos = listaNucleos->añadirDerecha(Nucleo()); // añado núcleo nuevo
-        cout << "Están todos llenos, hemos añadido un nuevo núcleo" << endl;
-        cout << "Ahora hay " << listaNucleos->longitudLista() << " núcleos" << endl;
-    }
-    cout << endl;
-}
-
-void encolarEnElMenor()
-{
-    cout << "-----PARA ENCOLAR COMPRUEBO CUAL ES EL NÚCLEO CON MENOS COLA-----" << endl;
-    mostrarColasDeNucleos(); // SOLO VISUAL
-
-    Nucleo* menor = NucleoConMenosProcesos(); // obtengo el núcleo con menos procesos en cola
-
-    if (menor->NdeProcesosEnCola() == 0 && menor->esVacio())
-    {
-        menor->procesar(pila.cimaPila()); // lo pongo a procesar directamente
-        cout << "Como no tiene cola y está vacío, lo meto en el núcleo." << endl;
-    }
-    else
-    {
-        menor->encolarProceso(pila.cimaPila()); // encolo el proceso en el núcleo menor
-        cout << "Encolo en el menor" << endl;
-    }
-    mostrarColasDeNucleos(); // SOLO VISUAL        
-    cout << endl;
-}
-
-Nucleo* NucleoConMenosProcesos()
-{
-    // Compruebo cual es el núcleo con menos procesos en cola y encolo
-    Nucleo* menor = listaNucleos->obtenerNodo(1); // por defecto cogemos el primero
-    for (int j = 1; j <= listaNucleos->longitudLista(); j++) // por cada núcleo
-    {
-        // si el núcleo j tiene menos procesos en cola que el núcleo menor
-        if (listaNucleos->obtenerNodo(j)->NdeProcesosEnCola() <= menor->NdeProcesosEnCola())
-        {
-            if (listaNucleos->obtenerNodo(j)->NdeProcesosEnCola() == menor->NdeProcesosEnCola() && listaNucleos->obtenerNodo(j)->esVacio())
-            {
-                cout << "El núcleo " << j << " tiene menos procesos en cola" << endl;
-                menor = listaNucleos->obtenerNodo(j); // el núcleo j es el nuevo menor
-            }
-            else if (listaNucleos->obtenerNodo(j)->NdeProcesosEnCola() < menor->NdeProcesosEnCola())
-            {
-                cout << "El núcleo " << j << " tiene menos procesos en cola" << endl;
-                menor = listaNucleos->obtenerNodo(j); // el núcleo j es el nuevo menor
-            }
-        }
-    }
-    cout << endl;
-    return menor;
-}
-
-void actualizarColasyNucleos()
-{
-    // actualizo los núcleos
-    for (int j = 1; j <= listaNucleos->longitudLista(); j++) // por cada núcleo
-    {
-        // actualizar suma 1 al tiempo que lleva ejecutado y al tiempo en SO
-        // si el proceso ha terminado, devuelve el tiempo que ha estado en el SO
-        // si no devuelve 0
-        int tiempo = listaNucleos->obtenerNodo(j)->actualizar(); 
-
-        // si el tiempo es distinto de 0, es que ha terminado, sumo 1 a procesosEjecutados
-        if (tiempo != 0)
-        {
-            procesosEjecutados += 1;
-        }
-        sumaTiempos += tiempo; // sumo el timepo que me ha devuelto al tiempo total
-    }
-
-    // actualizar las colas: esto solo suma 1 al tiempo en SO.
-    for (int j = 1; j <= listaNucleos->longitudLista(); j++) // por cada nucleo
-    {
-        listaNucleos->obtenerNodo(j)->obtenerColaNucleo()->actualizar(); // accedo a su cola y actualizo
-    }
-}
-
-void eliminarNucleosVacios()
-{
-    // compruebo el valor de nucleosVacios. Si hay más de 2, elimino núcleos vacíos hasta que queden 2
-    for (int j = 1; j <= listaNucleos->longitudLista(); j++) // por cada núcleo
-    {
-        // si está vacío y nucleosVacios es mayor que 2
-        if (listaNucleos->obtenerNodo(j)->esVacio() && listaNucleos->obtenerNodo(j)->obtenerColaNucleo()->esVacia() && listaNucleos->longitudLista() > 2)
-        {
-            cout << "Elimino núcleo " << j << endl;
-            listaNucleos = listaNucleos->eliminarNodo(j); // elimino el núcleo
-        }
-    }
-}
-
-void mostrarColasDeNucleos()
-{
-    if (listaNucleos->longitudLista() > 0){
-        for (int j = 1; j <= listaNucleos->longitudLista(); j++)
-        {
-            cout << "Cola de núcleo " << j << ": ";
-            listaNucleos->obtenerNodo(j)->mostrarColaNucleo();
-            
-        }
-        cout << endl;
-    }
-    else
-    {
-        cout << "No hay núcleos" << endl;
-        cout << endl;
-    }
-}
-
-bool nucleosVacios()
-{
-    // Compruebo si todos los núcleos están vacíos
-    bool vacio = true;
-    for (int j = 1; j <= listaNucleos->longitudLista(); j++)
-    {
-        cout << "Núcleo " << j << " tiene " << listaNucleos->obtenerNodo(j)->NdeProcesosEnCola() << " procesos en cola." << endl;
-        cout << "Núcleo " << j << " está vacío: ";
-        if (listaNucleos->obtenerNodo(j)->esVacio())
-        {
-            cout << "Sí" << endl;
-        }
-        else
-        {
-            cout << "No" << endl;
-        }
-        cout << endl;
-        if (!pila.esVacia() || listaNucleos->obtenerNodo(j)->NdeProcesosEnCola() != 0 || !listaNucleos->obtenerNodo(j)->esVacio())
-        {
-            vacio = false;
-        }
-    }
-    return vacio;
 }
