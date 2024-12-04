@@ -1,29 +1,44 @@
-#ifndef LISTA_H
-#define LISTA_H
+#ifndef LISTA_NUCLEOS_H
+#define LISTA_NUCLEOS_H
 #include "../Nucleo/Nucleo.h"
+#include "../Pila/Pila.h"
 #include <iostream>
 
-class Lista
+class ListaNucleos
 {
 private:
-    Nucleo primeroLista;
-    Lista* restoListaPtr;
+    Nucleo primeroListaNucleos;
+    ListaNucleos* restoListaNucleosPtr;
     int longitud;
     bool vacia;
 public:
-    Lista();
-    Lista(Nucleo nucleo, Lista *resto = new Lista());
-    ~Lista();
+    ListaNucleos();
+    ListaNucleos(Nucleo nucleo, ListaNucleos *resto = new ListaNucleos());
+    ~ListaNucleos();
+
     bool esVacia();
-    Lista resto(Lista lista);
-    Lista* restoPtr(Lista lista);
-    Nucleo primero(Lista lista);
-    Nucleo* obtenerNodo(int posicion);
-    Lista* eliminarNodo(int posicion);
-    Lista* añadirIzquierda(Nucleo nucleo);
-    Lista* añadirDerecha(Nucleo nucleo);
-    int longitudLista();
+    Nucleo primero(ListaNucleos lista);
     Nucleo* primeroPtr();
-    void mostrarLista(Lista lista);
+    ListaNucleos resto(ListaNucleos lista);
+    ListaNucleos* restoPtr(ListaNucleos lista);
+    
+    Nucleo* obtenerNodo(int posicion);
+    ListaNucleos* eliminarNodo(int posicion);
+    int longitudListaNucleos();
+    Nucleo* NucleoConMenosProcesos();
+
+    ListaNucleos* añadirIzquierda(Nucleo nucleo);
+    ListaNucleos* añadirDerecha(Nucleo nucleo);
+    
+    bool nucleosVacios();
+
+    void mostrarListaNucleos(ListaNucleos lista);
+    void mostrarColasDeNucleos();
+    void eliminarNucleosVacios();
+    void actualizarColasyNucleos(int* sumaTiempos, int* procesosEjecutados);
+    void encolarEnElMenor(Pila* pila);
+    void hacerHueco();
+    void desencolarYProcesar();
+    void detallesProcesosEjecucion();
 };
 #endif // NODOCOLA_H
