@@ -162,7 +162,7 @@ ListaProcesos* ABBProcesos::obtenerPrioridadEspecifica(int prioridad)
     if (nodo != nullptr) {
         return nodo->obtenerRaiz();
     } else {
-        return new ListaProcesos(-1);
+        return nullptr;
     }
 }
 
@@ -254,7 +254,15 @@ ABBProcesos ABBProcesos::copiarArbol(ABBProcesos* arbol)
 
 
 
-
+ABBProcesos* masIzquierda(ABBProcesos* arbol)
+{
+    ABBProcesos* masIzquierda = arbol;
+    while (masIzquierda->obtenerIzquierda() != nullptr)
+    {
+        masIzquierda = masIzquierda->obtenerIzquierda();
+    }
+    return masIzquierda;
+}
 
 
 
@@ -271,12 +279,96 @@ int siguienteInOrden(ABBProcesos* arbol, int actual = -1)
 
 void ABBProcesos::mostrarInOrden()
 {
-    cout << "InOrden: ";
+    cout << "InOrden: " << endl;
+    int prioridadActual = this->obtenerPrioridadMenor();
+    while (prioridadActual != this->obtenerPrioridadMayor())
+    {
+        this->obtenerPrioridadEspecifica(prioridadActual)->mostrarListaProcesos();
+        prioridadActual = siguienteInOrden(this, prioridadActual);
+    }
+    this->obtenerPrioridadEspecifica(prioridadActual)->mostrarListaProcesos();
+}
+
+void ABBProcesos::mostrarPromedioPreOrden()
+{
+    ABBProcesos* aux = this;
+    if (aux != nullptr) {
+        if (aux->obtenerRaiz()->obtenerPrioridad() == -1) {
+            aux = aux->obtenerDerecha();
+        }
+        cout << "Prioridad: " << aux->obtenerRaiz()->obtenerPrioridad() << " Tiempo promedio: " << aux->obtenerRaiz()->mediaTiempos() << " minutos" << endl;
+        aux->obtenerIzquierda()->mostrarPromedioPreOrden();
+        aux->obtenerDerecha()->mostrarPromedioPreOrden();
+    }
+}
+
+
+
+
+
+
+int ABBProcesos::numProcesosEjecutados()
+{
+    int actual = this->obtenerPrioridadMenor();
+    int n = 0;
+    while (actual != this->obtenerPrioridadMayor())
+    {
+        n += this->obtenerPrioridadEspecifica(actual)->longitudListaProcesos();
+        actual = siguienteInOrden(this, actual);
+    }
+    n += this->obtenerPrioridadEspecifica(actual)->longitudListaProcesos();
+    return n;
+}
+
+float ABBProcesos::mediaTiempos()
+{
+    if (this->numProcesosEjecutados() == 0) {
+        return 0;
+    } else {
+        int actual = this->obtenerPrioridadMenor();
+        int m = 0;
+        while (actual != this->obtenerPrioridadMayor())
+        {
+            m += this->obtenerPrioridadEspecifica(actual)->sumaTiemposProcesos();
+            actual = siguienteInOrden(this, actual);
+        }
+        m += this->obtenerPrioridadEspecifica(actual)->sumaTiemposProcesos();
+
+        float media = (float)m/(float)this->numProcesosEjecutados();
+        return media;
+    }
+}
+
+int ABBProcesos::mayorNumProcesos()
+{
+    int mayor = this->obtenerPrioridadMenor();
     int actual = this->obtenerPrioridadMenor();
     while (actual != this->obtenerPrioridadMayor())
     {
-        cout << actual << ", ";
+        if (this->obtenerPrioridadEspecifica(actual)->longitudListaProcesos() > mayor) {
+            mayor = this->obtenerPrioridadEspecifica(actual)->longitudListaProcesos();
+        }
         actual = siguienteInOrden(this, actual);
     }
-    cout << actual << endl;
+    if (this->obtenerPrioridadEspecifica(actual)->longitudListaProcesos() > mayor) {
+        mayor = this->obtenerPrioridadEspecifica(actual)->longitudListaProcesos();
+    }
+    return mayor;
+}
+
+int ABBProcesos::menorNumProcesos()
+{
+    int menor = this->obtenerPrioridadMenor();
+    int actual = this->obtenerPrioridadMenor();
+    while (actual != this->obtenerPrioridadMayor())
+    {
+        if (this->obtenerPrioridadEspecifica(actual)->longitudListaProcesos() < menor) {
+            menor = this->obtenerPrioridadEspecifica(actual)->longitudListaProcesos();
+        }
+        actual = siguienteInOrden(this, actual);
+    }
+    if (this->obtenerPrioridadEspecifica(actual)->longitudListaProcesos() < menor) {
+        menor = this->obtenerPrioridadEspecifica(actual)->longitudListaProcesos();
+    }
+    return menor;
 }

@@ -36,9 +36,14 @@ class ABBProcesos
         int obtenerPrioridadMenor();
         int obtenerPrioridadMayor();
         ListaProcesos* obtenerPrioridadEspecifica(int prioridad);
-        
+
+        int numProcesosEjecutados();
+        float mediaTiempos();
+        int mayorNumProcesos();
+        int menorNumProcesos();
 
         void mostrarInOrden();
+        void mostrarPromedioPreOrden();
 };
 
 #endif // ABB_PROCESOS_H

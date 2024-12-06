@@ -2,6 +2,7 @@
 #define LISTA_NUCLEOS_H
 #include "../Nucleo/Nucleo.h"
 #include "../Pila/Pila.h"
+#include "../ABBProcesos/ABBProcesos.h"
 #include <iostream>
 
 class ListaNucleos
@@ -25,7 +26,8 @@ public:
     Nucleo* obtenerNodo(int posicion);
     ListaNucleos* eliminarNodo(int posicion);
     int longitudListaNucleos();
-    Nucleo* NucleoConMenosProcesos();
+    Nucleo* nucleoConMenosProcesos();
+    Nucleo* nucleoConMasProcesos();
 
     ListaNucleos* añadirIzquierda(Nucleo nucleo);
     ListaNucleos* añadirDerecha(Nucleo nucleo);
@@ -35,10 +37,12 @@ public:
     void mostrarListaNucleos(ListaNucleos lista);
     void mostrarColasDeNucleos();
     void eliminarNucleosVacios();
-    void actualizarColasyNucleos(int* sumaTiempos, int* procesosEjecutados);
+    void actualizarColasyNucleos(ABBProcesos* arbolProcesos);
     void encolarEnElMenor(Pila* pila);
     void hacerHueco();
     void desencolarYProcesar();
     void detallesProcesosEjecucion();
+    void mostrarMenosOcupado();
+    void mostrarMasOcupado();
 };
 #endif // NODOCOLA_H

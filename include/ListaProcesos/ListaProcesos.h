@@ -31,8 +31,11 @@ public:
     ListaProcesos* añadirIzquierda(Proceso proceso);
     ListaProcesos* añadirDerecha(Proceso proceso);
     int longitudListaProcesos();
+    int sumaTiemposProcesos();
+    float mediaTiempos();
 
-    void mostrarListaProcesos(ListaProcesos lista);
+    void mostrarListaProcesos();
+    ListaProcesos obtenerOrdenadaPorPrioridad();
     
 };
 #endif // NODOCOLA_H

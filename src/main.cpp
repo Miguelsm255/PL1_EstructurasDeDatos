@@ -3,31 +3,26 @@
 #include "../include/Pila/Pila.h"
 #include "../include/Nucleo/Nucleo.h"
 #include "../include/ListaNucleos/ListaNucleos.h"
+#include "../include/ABBProcesos/ABBProcesos.h"
 using namespace std;
 
 void menuInicio();
 void menuEjecucion();
+void menuFinal();
 void definirProcesos();
 void crearProcesos(int n);
 void imprimirPila();
 void ejecutar(bool manual);
+void crearProcesoManualYAñadirlo();
 
 
 Pila pila = Pila();
 Pila procesosDisponibles = Pila();
-ListaNucleos* listaNucleos = new ListaNucleos();
-
-int sumaTiempos = 0;
-int procesosEjecutados = 0;
 
 int main(){
-    
-    //listaNucleos->añadirDerecha(Nucleo());
 
     bool salir = false;
     definirProcesos();
-    listaNucleos->añadirDerecha(Nucleo());
-    listaNucleos->añadirDerecha(Nucleo());
     
     while(salir == false)
     {
@@ -53,7 +48,6 @@ int main(){
         switch (opcion)
         {
         case 1:
-
             cout << "Ingrese la cantidad de procesos a crear: ";
             cin >> cuantos;
 
@@ -61,7 +55,7 @@ int main(){
                 cin.clear();
                 cin.ignore();
                 cuantos = 0;
-            }else{
+            } else {
                 crearProcesos(cuantos);
             }
             break;
@@ -76,12 +70,10 @@ int main(){
                 pila.desapilar();;
             }
             cout << "La pila ha sido borrada." << endl;
-            if (procesosDisponibles.esVacia())
-            {
+            if (procesosDisponibles.esVacia()) {
                 definirProcesos();
                 cout << "Se han redefinido los procesos" << endl;
             }
-
             break;
         case 4:
             ejecutar(true);
@@ -92,7 +84,6 @@ int main(){
         case 6:
             salir = true;
             break;
-    
         default:
             cout << "Opción no válida" << endl;
             break;
@@ -224,21 +215,148 @@ void crearProcesos(int n)
     
 }
 
+void crearProcesoManualYAñadirlo(ABBProcesos* arbolProcesos)
+{
+    int PID = 0;
+    int prioridad = 0;
+    bool salir = false;
+    
+    cout  << "Ingrese el PID del proceso a añadir: ";
+    cin >> PID;
+    while (!salir)
+    {
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore();
+            cout << endl << "PID no válido. Inténtelo de nuevo: ";
+        } else {
+            salir = true;
+        }
+    }
+    
+    salir = false;
+
+    while (!salir)
+    {
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore();
+            cout << endl << "Prioridad no válida. Inténtelo de nuevo: ";
+        } else {
+            salir = true;
+        }
+    }
+    arbolProcesos->insertar(Proceso(PID, prioridad, 0, 0));
+    cout << "Proceso añadido correctamente." << endl;
+}
+
 void menuEjecucion()
 {
     cout << endl;
     cout << "--------------- Menú de ejecución ---------------" << endl;
     cout << "   1. Mostrar detalles de procesos en ejecución" << endl;
     cout << "   2. Continuar" << endl;
-    cout << "   3. Continuar N minutos" << endl;
-    cout << "   4. Terminar Automáticamente" << endl;
+    cout << "   3. Mostrar núcleo menos ocupado y más ocupado" << endl;
+    cout << "   4. Añadir un proceso al árbol" << endl;
+    cout << "   5. Continuar N minutos" << endl;
+    cout << "   6. Terminar Automáticamente" << endl;
     cout << "-------------------------------------------------" << endl;
     cout << endl;
     cout << "Ingrese una opción: ";
 }
 
+void menuFinal(ABBProcesos* arbolProcesos)
+{
+    bool salir = false;
+    while (!salir)
+    {
+        cout << endl;
+        cout << "--------------- Menú Final ---------------" << endl;
+        cout << "   1. Mostrar los procesoso en orden" << endl;
+        cout << "   2. Mostrar procesos con una prioridad específica" << endl;
+        cout << "   3. Mostrar prioridades con más procesos y con menos procesos" << endl;
+        cout << "   4. Tiempo promedio de una prioridad específica" << endl;
+        cout << "   5. Mostrar el tiempo promedio en PreOrden" << endl;
+        cout << "   6. Salir" << endl;
+        cout << "-------------------------------------------------" << endl;
+        cout << endl;
+        cout << "Ingrese una opción: ";
+
+        int opcion = 0;
+        cin >> opcion;
+
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore();
+            opcion = 0;
+        }
+
+        switch (opcion)
+        {
+        case 1:             // mostrar los procesos en orden
+            arbolProcesos->mostrarInOrden();
+            break;
+        case 2:             // mostrar los procesos con una prioridad específica
+            cout << "Introduce la prioridad: ";
+            int p;
+            cin >> p;
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore();
+                cout << "Opción no válida" << endl;
+            } else {
+                cout << endl;
+                ListaProcesos* l = arbolProcesos->obtenerPrioridadEspecifica(p);
+                if (l != nullptr) {
+                    l->mostrarListaProcesos();
+                } else {
+                    cout << "No hay procesos con esa prioridad" << endl;
+                }
+            }
+            break;
+        case 3:             // mostrar prioridad con más y menos procesos
+            cout << "Prioridad con más procesos: " << arbolProcesos->mayorNumProcesos() << endl;
+            cout << "Prioridad con menos procesos: " << arbolProcesos->menorNumProcesos() << endl;
+            break;
+        case 4:             // tiempo promedio de una prioridad especifica
+            cout << "Introduce la prioridad: ";
+            int p2;
+            cin >> p2;
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore();
+                cout << "Opción no válida" << endl;
+            } else {
+                ListaProcesos* l2 = arbolProcesos->obtenerPrioridadEspecifica(p2);
+                if (l2 != nullptr) {
+                    cout << "Tiempo promedio de estancia: " << l2->mediaTiempos() << " minutos" << endl;
+                } else {
+                    cout << "No hay procesos con esa prioridad" << endl;
+                }
+            }
+            break;
+        case 5:             // mostrar el tiempo promedio en preorden
+            cout << "PreOrden: " << endl;
+            arbolProcesos->mostrarPromedioPreOrden();
+            break;
+        case 6:
+            salir = true;
+            break;
+        default:
+            cout << "Opción no válida" << endl;
+            break;
+        }  
+    }
+}
+
 void ejecutar(bool manual)
 {
+    ListaNucleos* listaNucleos = new ListaNucleos();
+    listaNucleos->añadirDerecha(Nucleo());
+    listaNucleos->añadirDerecha(Nucleo());
+
+    ABBProcesos* arbolProcesos = new ABBProcesos();
+
     int contador = 0;
     int sumar = 0;
     bool vacio = false;
@@ -261,24 +379,32 @@ void ejecutar(bool manual)
 
             switch (opcion) 
             {
-            case 1: // si la opción es 1, se muestran los detalles de los procesos en ejecución
+            case 1:                     // mostrar los detalles de los procesos en ejecución
                 listaNucleos->detallesProcesosEjecucion();
                 sumar = 0;
                 break;
-            case 2: // si la opción es 2, se avanza un minuto
+            case 2:                     // mostrar los detalles del núcleo más ocupado y del menos ocupado
+                listaNucleos->mostrarMenosOcupado();
+                listaNucleos->mostrarMasOcupado();
+                sumar = 0;
+                break;
+            case 3:                     // añadir un proceso al arbol
+                crearProcesoManualYAñadirlo(arbolProcesos);
+                break;
+            case 4:                     // avanzar un minuto
                 sumar = 1;
                 break;
-            case 3: // si la opción es 3, se avanza n minutos
+            case 5:                     // avanzar n minutos
                 cout << "Ingrese el tiempo a sumar: ";
                 cin >> sumar;
                 cout << endl;
                 break;
-            case 4: // si la opción es 4, se cambia a modo automático
+            case 6:                     // cambiar a modo automático
                 manual = false;
                 sumar = 0;
                 break;
             
-            default:    // si la opción no es ninguna de las anteriores, se muestra un mensaje de error
+            default:                    // mostrar un mensaje de error
                 cout << "Opción no válida" << endl;
                 cout << endl;
                 break;
@@ -317,7 +443,7 @@ void ejecutar(bool manual)
                 cout << endl;
             }
 
-            listaNucleos->actualizarColasyNucleos(&sumaTiempos, &procesosEjecutados);
+            listaNucleos->actualizarColasyNucleos(arbolProcesos);
             listaNucleos->eliminarNucleosVacios();
 
             vacio = listaNucleos->nucleosVacios() && pila.esVacia();
@@ -329,19 +455,43 @@ void ejecutar(bool manual)
     // Sale de aquí cuando termina de ejecutar todos los procesos
 
     cout << "Se han necesitado " << contador + 1 << " minutos para procesar todos los procesos." << endl;
-    cout << "Se han ejecutado " << procesosEjecutados << " procesos." << endl;
+    cout << "Se han ejecutado " << arbolProcesos->numProcesosEjecutados() << " procesos." << endl;
 
     // simple comprobación para que no divida por 0.
-    if (procesosEjecutados != 0)
+    if (arbolProcesos->numProcesosEjecutados() != 0)
     {
-        cout << "El tiempo medio de estancia de los procesos en el sistema operativo ha sido de " << (float)sumaTiempos/(float)procesosEjecutados << " minutos." << endl;
+        cout << "El tiempo medio de estancia de los procesos en el sistema operativo ha sido de " << arbolProcesos->mediaTiempos() << " minutos." << endl;
     }else{
         cout << "No se ha ejecutado ningún proceso." << endl;
     }
 
+
+    int opcion = 0;
+    cout  << "Ejecución terminada. Quiere ver detalles? (1: Sí, 2: No): ";
+    cin >> opcion;
+
+    if (cin.fail()) {
+        cin.clear();
+        cin.ignore();
+        opcion = 0;
+    }
+
+    switch (opcion)
+    {
+    case 1:
+        menuFinal(arbolProcesos);
+        break;
+    case
+        2: break;
+    }
+
+
+
+
+    
+
     // Reinicio de variables para una posible nueva iteración
     contador = 0;
-    sumaTiempos = 0;
-    procesosEjecutados = 0;
+    delete arbolProcesos;
     definirProcesos();
 }
