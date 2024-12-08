@@ -174,13 +174,10 @@ ListaProcesos* ABBProcesos::obtenerPrioridadEspecifica(int prioridad)
 
 ABBProcesos* crearNodo(ABBProcesos* arbol, int prioridad)
 {
-    if (prioridad <= arbol->obtenerRaiz()->obtenerPrioridad())
-    {
+    if (prioridad <= arbol->obtenerRaiz()->obtenerPrioridad()) {
         arbol->setIzquierda(new ABBProcesos(prioridad));
         return arbol->obtenerIzquierda();
-    }
-    else
-    {
+    } else {
         arbol->setDerecha(new ABBProcesos(prioridad));
         return arbol->obtenerDerecha();
     }
@@ -253,16 +250,6 @@ ABBProcesos ABBProcesos::copiarArbol(ABBProcesos* arbol)
 
 
 
-
-ABBProcesos* masIzquierda(ABBProcesos* arbol)
-{
-    ABBProcesos* masIzquierda = arbol;
-    while (masIzquierda->obtenerIzquierda() != nullptr)
-    {
-        masIzquierda = masIzquierda->obtenerIzquierda();
-    }
-    return masIzquierda;
-}
 
 
 
