@@ -3,6 +3,12 @@
 Proceso::Proceso()
 {
     // Constructor por defecto
+    PID = -1;
+    prioridad = -1;
+    tiempoInicio = -1;
+    tiempoEjecucion = -1;
+    tiempoEnSO = -1;
+    PPID = -1;
 }
 
 // Implementación del constructor parametrizado

@@ -5,7 +5,7 @@ TARGET = main
 
 # Compilador y flags
 CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++23
+CXXFLAGS = -Wall -Wextra -std=c++23 -g
 
 # Archivos fuente y ejecutable
 SRCS = $(wildcard src/*.cpp) $(wildcard include/**/*.cpp)

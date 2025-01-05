@@ -2,6 +2,7 @@
 #define NUCLEO_H
 #include "../Proceso/Proceso.h"
 #include "../Cola/Cola.h"
+#include "../ABBProcesos/ABBProcesos.h"
 
 class Nucleo
 {
@@ -16,6 +17,7 @@ public:
     Nucleo();
     Nucleo(int id);
     ~Nucleo();
+    
     bool esVacio();
     void procesar(Proceso proceso);
     void encolarProceso(Proceso proceso);
@@ -23,7 +25,7 @@ public:
     void mostrarNucleo();
     void mostrarColaNucleo();
     int NdeProcesosEnCola();
-    int actualizar();
+    void actualizar(ABBProcesos* arbolProcesos);
     Cola* obtenerColaNucleo();
     int getID();
 };
