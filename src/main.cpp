@@ -277,7 +277,8 @@ void menuFinal(ABBProcesos* arbolProcesos)
         cout << "   3. Mostrar prioridades con más procesos y con menos procesos" << endl;
         cout << "   4. Tiempo promedio de una prioridad específica" << endl;
         cout << "   5. Mostrar el tiempo promedio en PreOrden" << endl;
-        cout << "   6. Salir" << endl;
+        cout << "   6. Insertar proceso en el árbol" << endl;
+        cout << "   7. Salir" << endl;
         cout << "-------------------------------------------------" << endl;
         cout << endl;
         cout << "Ingrese una opción: ";
@@ -339,7 +340,10 @@ void menuFinal(ABBProcesos* arbolProcesos)
             cout << "PreOrden: " << endl;
             arbolProcesos->mostrarPromedioPreOrden();
             break;
-        case 6:
+        case 6:             // insertar proceso en el árbol
+            crearProcesoManualYAñadirlo(arbolProcesos);
+            break;
+        case 7:
             salir = true;
             break;
         default:

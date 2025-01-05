@@ -270,8 +270,20 @@ void ABBProcesos::mostrarInOrden()
     int prioridadActual = this->obtenerPrioridadMenor();
     while (prioridadActual != this->obtenerPrioridadMayor())
     {
+        cout << "  El nodo " << prioridadActual << " es hijo de la prioridad " << buscarPadre(prioridadActual, this)->obtenerRaiz()->obtenerPrioridad();
+        if (prioridadActual <= buscarPadre(prioridadActual, this)->obtenerRaiz()->obtenerPrioridad()) {
+            cout << " por la izquierda" << endl;
+        } else {
+            cout << " por la derecha" << endl;
+        }
         this->obtenerPrioridadEspecifica(prioridadActual)->mostrarListaProcesos();
         prioridadActual = siguienteInOrden(this, prioridadActual);
+    }
+    cout << "  El nodo " << prioridadActual << " es hijo de la prioridad " << buscarPadre(prioridadActual, this)->obtenerRaiz()->obtenerPrioridad();
+    if (prioridadActual <= buscarPadre(prioridadActual, this)->obtenerRaiz()->obtenerPrioridad()) {
+        cout << " por la izquierda" << endl;
+    } else {
+        cout << " por la derecha" << endl;
     }
     this->obtenerPrioridadEspecifica(prioridadActual)->mostrarListaProcesos();
 }
